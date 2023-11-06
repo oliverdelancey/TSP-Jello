@@ -1,7 +1,93 @@
-<form method="post" action="userauth.php">
-<label for="uname">Username:</label><br>
-<input type="text" id="uname" name="uname"><br>
-<label for="password">Password:</label><br>
-<input type="password" id="password" name="password"><br><br>
-<input type="submit" value="Login">
-</form>
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <style>
+        body {
+            font-family: Arial;
+            border-radius: 10px;
+            padding: 100px;
+            margin: 20px;
+            background-image: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+        }
+
+        .header {
+            border-radius: 10px;
+            padding: 20px;
+            text-align: left;
+            background: white;
+        }
+
+        .header h1 {
+            font-size: 50px;
+        }
+
+        .content {
+            font-family: Trebuchet MS;
+            border-radius: 40px;
+            padding: 40px;
+            background: white;
+        }
+
+        input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=password],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+        input[type=submit],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 0px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background: #DDDFDF;
+            color: #222222;
+        }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="content">
+
+        <div class="header">
+            <h1>Jello Sign In</h1>
+        </div>
+
+        <form method="post" action="userauth.php">
+
+            <label for="uname">Username:</label><br>
+            <p class="light"> <input type="text" id="uname" name="uname" placeholder="Type your username"
+                    onClick="this.value='';"><br> </p>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" placeholder="Type your password"
+                onClick="this.value='';"><br><br>
+
+            <input type="submit" value="Log in">
+        </form>
+
+    </div>
+  </body>
+</html>
