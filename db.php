@@ -1,32 +1,37 @@
 <?php
-    function connectDB() { 
-        $config = parse_ini_file("db.ini"); 
-        $dbh = new PDO($config['dsn'], $config['username'], $config['password']); 
-        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-        return $dbh; 
-    }
+
+include "database.php";
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+$conn = new mysqli($server, $username, $password, $database);
+if ($conn->connect_error) {
+	die("connection failed: " . $conn->connect_error);
+}
+
 
     function authenticateUser($username, $password){
         return null;
     }
 
-    function get_projects($userid){
 
+    function get_projects($userid){
         try{
-            $dbh = connectDB();
-            $statement = $dbh->prepare(
+            $statement = $conn->prepare(
                 "select name, start, end, id, description 
                     from project 
-                    inner join projectAssignments on id = proj_id and :userid = user_id;
+                    inner join projectAssignments on id = proj_id and ? = user_id;
                     "
             );
 
-            $statement->bindParam(":username", $username);
+            $statement->bind_param("d", $userid);
 
-            $result = $statement->execute();
+            $statement->execute(); 
+            $result = $statement->get_result();
 
-            $dbh = null;
-            return $row;
+            return $result;
         } catch(PDOException $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -34,11 +39,47 @@
     }
 
     function getColumns($projectid){
-        return null;
+        try{
+
+            $statement = $conn->prepare(
+                "select id, name 
+                    from column 
+                    where proj_id = ?;
+                    "
+            );
+
+            $statement->bind_param("d", $projectid);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+
+            return $result;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
     }
 
     function getTasks($columnid){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "select id, priority, description, status, user_id 
+                    from task
+                    inner join taskAssignments on id = task_id
+                    where col_id = ?;
+                    "
+            );
+
+            $statement->bind_param("d", $columnid);
+
+            $result = $statement->execute();
+
+            return $row;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
     }
 
     function getCollaborators($projectid){
