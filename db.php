@@ -85,8 +85,32 @@ if ($conn->connect_error) {
     function get_collaborators($projectid){
         return null;
     }
+    
+    //need to add code to add the user to their newly created project
+    function create_project($name, $end = null, $description){
+        try {
+            //$id = rand(1, 100000);
 
-    function create_project($name, $start, $end, $description){
+            if($end <= 0){
+                throw new PDOException
+            }
+
+            $statement = $conn->prepare(
+                "insert into project 
+                    (name, start, end, id, description) 
+                    values (?, NOW(), NOW() + ?, RAND() * (100000 - 1) + 1, ?);"
+            );
+            
+            $statement->bind_param("sis", $name, $end, $description);
+
+            $result = $statement->execute();
+
+            return "Project created successfully!";
+        } catch (PDOException $e) {
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die();
+        }
+        
         return null;
     }
 
