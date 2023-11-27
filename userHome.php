@@ -84,6 +84,11 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
 
+    $conn = new mysqli($server, $username, $password, $database);
+    if ($conn->connect_error) {
+    	die("connection failed: " . $conn->connect_error);
+    }
+
     function display_projects(){
         try{
             $statement = $conn->prepare(
