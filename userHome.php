@@ -94,11 +94,11 @@
             $statement = $conn->prepare(
                 "select name, description, start, end
                     from project 
-                    inner join projectAssignments on id = proj_id and uid = user_id;
+                    inner join projectAssignments on id = proj_id and ? = user_id;
                     "
             );
     
-            $statement->bind_param("uid", $uid);
+            $statement->bind_param("s", $uid);
     
             $result = $statement->execute(); 
     
