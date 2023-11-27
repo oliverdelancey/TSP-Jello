@@ -40,7 +40,7 @@ function display_projects(){
                 "
         );
 
-        $statement->bind_param("d", getUser_ID());
+        $statement->bind_param("d", "1111");
 
         $statement->execute(); 
         $result = $statement->get_result();
