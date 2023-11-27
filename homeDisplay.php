@@ -12,6 +12,24 @@ if ($conn->connect_error) {
 	die("connection failed: " . $conn->connect_error);
 }
 
+get_userID(){
+    try{
+        $statement = $conn->prepare(
+            "select id from users where username = ?"
+        );
+
+        $statement->bind_param("d", $_POST["uname"];);
+
+        $statement->execute(); 
+        $result = $statement->get_result();
+
+        return $result;
+    } catch(PDOException $e){
+        print "Error!" . $e->getMessage() . "<br/>"; 
+        die(); 
+    }
+}
+
 function display_projects(){
     try{
         $statement = $conn->prepare(
@@ -21,7 +39,7 @@ function display_projects(){
                 "
         );
 
-        $statement->bind_param("d", $_POST["uname"];);
+        $statement->bind_param("d", getUser_ID(););
 
         $statement->execute(); 
         $result = $statement->get_result();
