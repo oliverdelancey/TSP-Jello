@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 }
 
 $uname = $_POST["uname"];
+$_SESSION["uname"]=$_POST["uname"];
 $valid_input = true;
 if (empty($uname)) {
 	echo "Username field is empty";
@@ -41,7 +42,6 @@ if ($valid_input) {
 	}
 	if ($isSuccess) {
 		echo "login successful";
-		$_SESSION["uname"]=$_POST["uname"];
 		header("LOCATION: userHome.php");
 	} else {
 		echo "login failed";
