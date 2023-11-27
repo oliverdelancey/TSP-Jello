@@ -2,7 +2,7 @@
 <body>
 <?php
 include "database.php";
-session_start();
+#session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 $uname = $_POST["uname"];
-$_SESSION["uname"]=$_POST["uname"];
+#$_SESSION["uname"] = $_POST["uname"];
 $valid_input = true;
 if (empty($uname)) {
 	echo "Username field is empty";

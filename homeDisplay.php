@@ -18,7 +18,7 @@ get_userID(){
             "select id from users where username = ?"
         );
 
-        $statement->bind_param("d", $_SESSION["uname"]);
+        $statement->bind_param("d", "1111");
 
         $statement->execute(); 
         $result = $statement->get_result();
