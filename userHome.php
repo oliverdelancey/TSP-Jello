@@ -91,18 +91,15 @@
     $uid = 1111;
     function display_projects(){
         try{
-            $statement = $conn->prepare(
-                "select name, description, start, end
-                    from project 
-                    inner join projectAssignments on id = proj_id and ? = user_id;
-                    "
-            );
+            $query = $conn->prepare("SELECT name, description, start, end
+            FROM project 
+            INNER JOIN projectAssignments ON id = proj_id AND :uid = user_id;
+            ");
+	        $query->bind_param(":uid", $uid);
+	        $query->execute();
+	        $result = $query->get_result();
     
-            $statement->bind_param("s", $uid);
-    
-            $result = $statement->execute(); 
-    
-            while ($row = $statement->fetch()){
+            while ($row = $query->fetch()){
                 echo "<tr>";
                 $data = $row[0] . "\t";
                 echo "<td>";
