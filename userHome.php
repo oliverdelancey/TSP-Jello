@@ -92,13 +92,6 @@
     
             $result = $statement->execute(); 
     
-            echo "<table>";
-            echo "<tr>";
-                echo "<th>Name</th>";
-                echo "<th>Description</th>";
-                echo "<th>Start</th>";
-                echo "<th>End</th>";
-            echo "</tr>";
             while ($row = $statement->fetch()){
                 echo "<tr>";
                 $data = $row[0] . "\t";
@@ -147,6 +140,14 @@
   <body>
     
     <br>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+        
     <?php
         display_projects();
     ?>  
