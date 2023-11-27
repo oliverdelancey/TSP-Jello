@@ -79,6 +79,8 @@
         </form>
     
     <?php 
+    include "homeDisplay.php"
+    require "homeDisplay.php";
     /*
         echo "<p>The username should be here: $_SESSION["uname"] </p>";
         if (!isset($_SESSION["uname"])) {
@@ -100,8 +102,7 @@
     
     <br>
     <?php
-    require "homeDisplay.php";
-    display_projects();
+        display_projects();
     ?>  
     <!--TODO:
         Button that leads to project creation page

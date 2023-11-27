@@ -72,6 +72,7 @@ function display_projects(){
             echo "</tr>";
         }
         echo "</table>";
+        echo "test";
     } catch(PDOException $e){
         print "Error!" . $e->getMessage() . "<br/>"; 
         die(); 
