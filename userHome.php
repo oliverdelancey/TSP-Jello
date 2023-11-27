@@ -86,6 +86,7 @@
     
     <br>
     <?php
+    require "homeDisplay.php";
     display_projects();
     ?>  
     <!--TODO:
