@@ -79,8 +79,53 @@
         </form>
     
     <?php 
-    include "homeDisplay.php"
-    require "homeDisplay.php";
+    function display_projects(){
+        try{
+            $statement = $conn->prepare(
+                "select name, description, start, end
+                    from project 
+                    inner join projectAssignments on id = proj_id and ? = user_id;
+                    "
+            );
+    
+            $statement->bind_param("d", "1111");
+    
+            $statement->execute(); 
+            $result = $statement->get_result();
+    
+            echo "<table>";
+            echo "<tr>";
+                echo "<th>Name</th>";
+                echo "<th>Description</th>";
+                echo "<th>Start</th>";
+                echo "<th>End</th>";
+            echo "</tr>";
+            while ($row = $statement->fetch()){
+                echo "<tr>";
+                $data = $row[0] . "\t";
+                echo "<td>";
+                print $data; 
+                echo "</td>";
+                $data = $row[1] . "\t";
+                echo "<td>";
+                print $data; 
+                echo "</td>";
+                $data = $row[2] . "\n";
+                echo "<td>";
+                print $data;
+                $data = $row[3] . "\n";
+                echo "<td>";
+                print $data; 
+                echo "</td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "test";
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
+    }
     /*
         echo "<p>The username should be here: $_SESSION["uname"] </p>";
         if (!isset($_SESSION["uname"])) {
@@ -91,6 +136,8 @@
             #session_destroy();
             header("LOCATION: index.html");
         }
+
+        
     ?>
         
     </div>
