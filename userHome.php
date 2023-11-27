@@ -72,22 +72,22 @@
             Home
         </h1>
         
-        <form method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">
+        <!--<form method="post" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>">-->
             <p style="float: right">
                 <input type="submit" value="Log Out" name="logout">  
             </p><br>
-        </form>
+        <!--</form>-->
     
     <?php 
         echo "<p>The username should be here: $_SESSION["uname"] </p>";
-        /*if (!isset($_SESSION["uname"])) {
-                header("LOCATION: index.html");
+        if (!isset($_SESSION["uname"])) {
+                #header("LOCATION: index.html");
         }  
     
         if ( isset($_POST["logout"]) ) {
             session_destroy();
             header("LOCATION: index.html");
-        }*/
+        }
     ?>
         
     </div>
