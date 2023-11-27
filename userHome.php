@@ -79,14 +79,15 @@
         </form>
     
     <?php 
-        if (!isset($_SESSION["uname"])) {
+        echo "<p>The username should be here: $_SESSION["uname"] </p>";
+        /*if (!isset($_SESSION["uname"])) {
                 header("LOCATION: index.html");
         }  
     
         if ( isset($_POST["logout"]) ) {
             session_destroy();
             header("LOCATION: index.html");
-        }
+        }*/
     ?>
         
     </div>
