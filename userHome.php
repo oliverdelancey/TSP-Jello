@@ -98,7 +98,7 @@
                     "
             );
     
-            $statement->bind_param("d", 1111);
+            $statement->bind_param("d", "1111");
     
             $result = $statement->execute(); 
     
