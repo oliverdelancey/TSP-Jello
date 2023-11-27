@@ -92,7 +92,7 @@ if ($conn->connect_error) {
             //$id = rand(1, 100000);
 
             if($end <= 0){
-                throw new PDOException
+                throw new PDOException("End date needs to be greater than the current date and time");
             }
 
             $statement = $conn->prepare(
