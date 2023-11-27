@@ -22,8 +22,9 @@ get_userID(){
 
         $statement->execute(); 
         $result = $statement->get_result();
+        $row = $statement->fetch()
 
-        return $result;
+        return $row[0];
     } catch(PDOException $e){
         print "Error!" . $e->getMessage() . "<br/>"; 
         die(); 
