@@ -1,93 +1,153 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
 
-  <head>
-    <style>
-        body {
-            font-family: Arial;
-            border-radius: 10px;
-            padding: 100px;
-            margin: 20px;
-            background-image: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
-        }
+            .navbar {
 
-        .header {
-            border-radius: 10px;
-            padding: 20px;
-            text-align: left;
-            background: white;
-        }
+                display:flex;
+                flex-direction:row;
 
-        .header h1 {
-            font-size: 50px;
-        }
+                text-align:left;
+                color:#ffffff;
+                font-size:20px;
+                padding: 0px 0px;
+                top:0px;
+                left:0px;
+                position:fixed;
+                width:100%;
+                background-image: linear-gradient(180deg, #020024 0%, #090979 100%);
+                overflow: hidden;
+            }
 
-        .content {
-            font-family: Trebuchet MS;
-            border-radius: 40px;
-            padding: 40px;
-            background: white;
-        }
+            .navbar-right {
+                margin-left:auto;
+                align-self:center;
+            }
 
-        input[type=text],
-        select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+            .navbar a {
+                color: #ffffff;
+                padding: 0px 20px;
+                text-decoration: none;
+            }
 
-        input[type=password],
-        select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+            .navbar h1 {
+                padding: 0px 20px;
+            }
+            
+            .content {
+                margin-top:200px;
+            }
 
+            .container {
+                font-family: 'Trebuchet MS';
+                border-radius: 40px;
+                margin-top:20px;
+                margin-bottom:20px;
+                margin-left: 300px;
+                margin-right: 300px;
+                padding: 40px;
+                background: white;
+            }
 
-        input[type=submit],
-        select {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 0px;
-            border-radius: 4px;
-            box-sizing: border-box;
-            background: #DDDFDF;
-            color: #222222;
-        }
-    </style>
-  </head>
+            body {
+                background-image: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
+            }
 
-  <body>
+            h1 {
+                font-family: 'Trebuchet MS';
+                font-size: 30px;
+            }
+            
+            label {
+                font-size:16px;
+            }
 
-    <div class="content">
+            input[type=button],
+            select {
+                width: 100%;
+                padding: 10px 10px;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                font-family: 'Trebuchet MS';
+                font-size: 20px;
+            }
+    
+            input[type=text],
+            select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+    
+            input[type=password],
+            select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+    
+    
+            input[type=submit],
+            select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 0px;
+                border-radius: 4px;
+                box-sizing: border-box;
+                background: #DDDFDF;
+                color: #222222;
+            }
+    
+        </style>
+    </head>
 
-        <div class="header">
-            <h1>Jello Sign In</h1>
+    <body>
+          
+        <div class="navbar">
+            <h1>Jello</h1>
+            <div class = "navbar-right">
+                <a href="http://syenite.net/simplelogin.html">Sign In</a>
+                <a href="http://syenite.net/register.html">Register</a>
+            </div>
+            
         </div>
 
-        <form method="post" action="userauth.php">
+        <div class="content">
+            <div class="container">
+    
+                <h1>Jello Sign In</h1>
+                <form method="post" action="userauth.php">
+        
+                    <label for="uname">Username:</label><br>
+                    <p><input type="text" id="uname" name="uname" placeholder="Type your username"
+                            onClick="this.value='';"><br></p>
+        
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" placeholder="Type your password"
+                        onClick="this.value='';"><br><br>
+        
+                    <input type="submit" value="Log in"><br>
+                </form>
+                <label for="register" id="register"><p>Don't have an account? <a href="http://syenite.net/register.html">Register</a></p></label>
+            </div>
+        </div>
 
-            <label for="uname">Username:</label><br>
-            <p class="light"> <input type="text" id="uname" name="uname" placeholder="Type your username"
-                    onClick="this.value='';"><br> </p>
+    </body>
 
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" placeholder="Type your password"
-                onClick="this.value='';"><br><br>
+  <footer>
+  </footer>
 
-            <input type="submit" value="Log in">
-        </form>
-
-    </div>
-  </body>
 </html>
