@@ -156,7 +156,7 @@
         </tr>
 
     <?php
-        display_projects();
+        #display_projects();
     ?>  
     <p> test2 </p>
     <!--TODO:
