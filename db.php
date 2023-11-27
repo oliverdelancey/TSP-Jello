@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 
-    function authenticateUser($username, $password){
+    function authenticate_user($username, $password){
         return null;
     }
 
@@ -38,7 +38,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function getColumns($projectid){
+    function get_columns($projectid){
         try{
 
             $statement = $conn->prepare(
@@ -61,7 +61,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function getTasks($columnid){
+    function get_tasks($columnid){
         try{
             $statement = $conn->prepare(
                 "select id, priority, description, status, user_id 
@@ -82,57 +82,57 @@ if ($conn->connect_error) {
         }
     }
 
-    function getCollaborators($projectid){
+    function get_collaborators($projectid){
         return null;
     }
 
-    function createProject($name, $start, $end, $description){
+    function create_project($name, $start, $end, $description){
         return null;
     }
 
-    function createColumn($name, $projectid){
+    function create_column($name, $projectid){
         return null;
     }
     
-    function createTask($priority, $description, $columnid, $projectid){
+    function create_task($priority, $description, $columnid, $projectid){
         return null;
     }
 
-    function createUser($username, $password){
+    function create_user($username, $password){
         return null;
     }
     
-    function deleteProject($columnid){
+    function delete_project($columnid){
         return null;
     }
     
     //i want this to orphan tasks to the default column
     //since it's "on delete cascade", move the tasks' column
     //ids to the default before deleting column
-    function deleteColumn($columnid, $defaultid){
+    function delete_column($columnid, $defaultid){
         return null;
     }
     
-    function deleteTask($columnid){
+    function delete_task($columnid){
         return null;
     }
 
-    function modifyTask($id, $priority, $description, $status, $columnid){
+    function modify_task($id, $priority, $description, $status, $columnid){
         return null;
     }
 
-    function modifyProject($id, $name, $start, $end, $description){
+    function modify_project($id, $name, $start, $end, $description){
         return null;
     }
 
-    function modifyColumn($id, $name){
+    function modify_column($id, $name){
         return null;
     }
 
-    function modifyTaskAssignment($userid, $taskid){
+    function modify_task_assignment($userid, $taskid){
         return null;
     }
-    function createProjectAssignment($userid, $projectid){
+    function create_project_assignment($userid, $projectid){
         return null;
     }
     function delete_project_assignment($userid, $projectid){
