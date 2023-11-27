@@ -88,17 +88,17 @@
     if ($conn->connect_error) {
     	die("connection failed: " . $conn->connect_error);
     }
-
+    $uid = 1111;
     function display_projects(){
         try{
             $statement = $conn->prepare(
                 "select name, description, start, end
                     from project 
-                    inner join projectAssignments on id = proj_id and ? = user_id;
+                    inner join projectAssignments on id = proj_id and uid = user_id;
                     "
             );
     
-            $statement->bind_param("d", "1111");
+            $statement->bind_param("uid", $uid);
     
             $result = $statement->execute(); 
     
