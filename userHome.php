@@ -79,6 +79,11 @@
         </form>
     
     <?php 
+    include "database.php";
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     function display_projects(){
         try{
             $statement = $conn->prepare(
@@ -147,7 +152,7 @@
             <th>Start</th>
             <th>End</th>
         </tr>
-        
+
     <?php
         display_projects();
     ?>  
