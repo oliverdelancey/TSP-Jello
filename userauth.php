@@ -2,6 +2,7 @@
 <body>
 <?php
 include "database.php";
+session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -40,6 +41,7 @@ if ($valid_input) {
 	}
 	if ($isSuccess) {
 		echo "login successful";
+		$_SESSION["uname"]=$_POST["uname"];
 		header("LOCATION: userHome.php");
 	} else {
 		echo "login failed";
