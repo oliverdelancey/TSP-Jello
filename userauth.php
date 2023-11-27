@@ -40,6 +40,7 @@ if ($valid_input) {
 	}
 	if ($isSuccess) {
 		echo "login successful";
+		header("LOCATION: userHome.php");
 	} else {
 		echo "login failed";
 	}
