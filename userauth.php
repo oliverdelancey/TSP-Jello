@@ -35,13 +35,13 @@ if ($valid_input) {
     if($_POST["submit"]=="Log in") {
         if(authenticate_user($uname, $password)) {
             echo "login successful";
-		    header("LOCATION: userHome.php");
+		    header('Location: userHome.php');
         }
     }
 
     if($_POST["submit"]=="Create User") {
         if(create_user($uname, $password)) {
-            header("LOCATION: simplelogin.html");
+            header('Location: simplelogin.html');
         }
     }
 }
