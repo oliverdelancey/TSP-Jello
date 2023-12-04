@@ -122,14 +122,6 @@ if ($conn->connect_error) {
         }
     }
 
-    function create_project($name, $start, $end, $description){
-        return null;
-    }
-
-    function create_column($name, $projectid){
-        return null;
-    }
-    
     //need to add code to add the user to their newly created project
     function create_project($name, $end = null, $description){
         try {
@@ -159,6 +151,10 @@ if ($conn->connect_error) {
     }
 
     function create_column($name, $projectid){
+        return null;
+    }
+
+    function create_task($priority, $description, $columnid, $projectid){
         return null;
     }
 
@@ -259,13 +255,96 @@ if ($conn->connect_error) {
     }
 
     function modify_task_assignment($userid, $taskid){
-        return null;
+        try{
+            $conn->begin_transaction();
+                $statement1 = $conn->prepare(
+                    "select user_id from taskAssignments
+                        where task_id = ?;                    
+                    "
+                );
+                $statement1->bind_param("d", $taskid);
+                $statement1->execute();
+                $result1 = $statement->get_result();
+                $result1Row = $result1->fetch_row();
+
+                if($result1Row == null){
+                    $statement2 = $conn->prepare(
+                        "insert into taskAssignment
+                            values (?, ?);
+                        "
+                    )
+                    $statement2->bind_param("dd", $userid, $taskid);
+                    $statement2->execute();
+                    $result2 = $statement->get_result();
+                } else if($result1Row[0] == $userid){
+                    $statement2 = $conn->prepare(
+                        "update taskAssignment
+                            set user_id = NULL
+                            where task_id = ?;
+                            "
+                    );
+                    $statement2->bind_param("d", $taskid);
+                    $statement2->execute();
+                    $result2 = $statement->get_result();    
+                } else{
+                    $statement2 = $conn->prepare(
+                        "update taskAssignment
+                            set user_id = ?
+                            where task_id = ?;
+                            "
+                    );
+                    $statement2->bind_param("dd", $userid, $taskid);
+                    $statement2->execute();
+                    $result2 = $statement->get_result();
+                }
+
+            $conn->commit();
+
+            return ($result2->fetch_row())[0];
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            $conn->rollback();
+            return $e->getCode();
+        }
     }
+
     function create_project_assignment($userid, $projectid){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "insert into projectAssignments
+                    values (?, ?);
+                    "
+            );
+
+            $statement->bind_param("dd", $userid, $projectid);
+
+            $statement->execute(); 
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+        }
     }
+    
     function delete_project_assignment($userid, $projectid){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "remove from task
+                    where user_id = ? and proj_id = ?;
+                    "
+            );
+
+            $statement->bind_param("dd", $userid, $projectid);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
     }
 
 
