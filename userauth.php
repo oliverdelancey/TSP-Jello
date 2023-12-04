@@ -8,7 +8,7 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 @@ -14,7 +14,7 @@
-}
+
 
 $uname = $_POST["uname"];
 $_SESSION["uname"]=$_POST["uname"];
