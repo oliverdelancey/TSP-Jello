@@ -2,6 +2,7 @@
 <body>
 <?php
 include "database.php";
+include "db.php";
 #session_start();
 
 ini_set('display_errors', 1);
