@@ -1,129 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-
-            .navbar {
-
-                display:flex;
-                flex-direction:row;
-
-                text-align:left;
-                color:#ffffff;
-                font-size:20px;
-                padding: 0px 0px;
-                top:0px;
-                left:0px;
-                position:fixed;
-                width:100%;
-                background-image: linear-gradient(180deg, #020024 0%, #090979 100%);
-                overflow: hidden;
-            }
-
-            .navbar-right {
-                margin-left:auto;
-                align-self:center;
-            }
-
-            .navbar a {
-                color: #ffffff;
-                padding: 0px 20px;
-                text-decoration: none;
-            }
-
-            .navbar h1 {
-                padding: 0px 20px;
-            }
-            
-            .content {
-                margin-top:200px;
-            }
-
-            .container {
-                font-family: 'Trebuchet MS';
-                border-radius: 40px;
-                margin-top:20px;
-                margin-bottom:20px;
-                margin-left: 300px;
-                margin-right: 300px;
-                padding: 40px;
-                background: white;
-            }
-
-            body {
-                background-image: linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%);
-            }
-
-            h1 {
-                font-family: 'Trebuchet MS';
-                font-size: 30px;
-            }
-            
-            label {
-                font-size:16px;
-            }
-
-            input[type=button],
-            select {
-                width: 100%;
-                padding: 10px 10px;
-                display: inline-block;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-                font-family: 'Trebuchet MS';
-                font-size: 20px;
-            }
-    
-            input[type=text],
-            select {
-                width: 100%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                display: inline-block;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-    
-            input[type=password],
-            select {
-                width: 100%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                display: inline-block;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-                box-sizing: border-box;
-            }
-    
-    
-            input[type=submit],
-            select {
-                width: 100%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                display: inline-block;
-                border: 0px;
-                border-radius: 4px;
-                box-sizing: border-box;
-                background: #DDDFDF;
-                color: #222222;
-            }
-    
-        </style>
+        <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
           
-        <div class="navbar">
-            <h1>Jello</h1>
-            <div class = "navbar-right">
-                <a href="http://syenite.net/simplelogin.html">Sign In</a>
-                <a href="http://syenite.net/register.html">Register</a>
-            </div>
+        <ul>
+            <li class="h1" style="font-size:30px; font-weight:600">Jello</li>
+
+            <li class="active" style="float:right"><a href="http://syenite.net/simplelogin.html">Sign In</a></li>
+            <li style="float:right"><a href="http://syenite.net/register.html">Register</a></li>
             
-        </div>
+        </ul>
 
         <div class="content">
             <div class="container">
