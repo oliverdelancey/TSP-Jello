@@ -85,7 +85,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function getCollaborators($projectid){
+    function get_collaborators($projectid){
         try{
             $statement = $conn->prepare(
                 "select name, id 
@@ -106,11 +106,11 @@ if ($conn->connect_error) {
         }
     }
 
-    function createProject($name, $start, $end, $description){
+    function create_project($name, $start, $end, $description){
         return null;
     }
 
-    function createColumn($name, $projectid){
+    function create_column($name, $projectid){
         return null;
     }
     
@@ -145,8 +145,12 @@ if ($conn->connect_error) {
     function create_column($name, $projectid){
         return null;
     }
+
+    function create_user($username, $password){
+        return null;
+    }
     
-    function deleteProject($projectid){
+    function delete_project($projectid){
         try{
             $statement = $conn->prepare(
                 "delete from project
@@ -174,7 +178,7 @@ if ($conn->connect_error) {
         return null;
     }
     
-    function deleteTask($taskid){
+    function delete_task($taskid){
         try{
             $statement = $conn->prepare(
                 "delete from task
@@ -195,7 +199,7 @@ if ($conn->connect_error) {
         return null;
     }
 
-    function modifyTask($id, $priority, $description, $status, $columnid){
+    function modify_task($id, $priority, $description, $status, $columnid){
         try{
             $statement = $conn->prepare(
                 "update task
