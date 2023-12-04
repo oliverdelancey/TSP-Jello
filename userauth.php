@@ -13,39 +13,36 @@ if ($conn->connect_error) {
 	die("connection failed: " . $conn->connect_error);
 }
 
+$valid_input = true;
+
 $uname = $_POST["uname"];
 #$_SESSION["uname"] = $_POST["uname"];
-$valid_input = true;
+
 if (empty($uname)) {
 	echo "Username field is empty";
 	$valid_input = false;
 }
+
 $password = $_POST["password"];
+
 if (empty($password)) {
 	echo "password field is empty";
 	$valid_input = false;
 }
 
 if ($valid_input) {
-	$query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
-	$query->bind_param("s", $uname);
-	$query->execute();
-	$result = $query->get_result();
-	$isSuccess = false;
-	while ($row = $result->fetch_assoc()) {
-		if (!empty($row)) {
-			$hpassword = $row["password"];
-			if ($password == $hpassword) {
-				$isSuccess = true;
-			}
-		}
-	}
-	if ($isSuccess) {
-		echo "login successful";
-		header("LOCATION: userHome.php");
-	} else {
-		echo "login failed";
-	}
+    if($_POST["submit"]=="Log in") {
+        if(authenticate_user($uname, $password)) {
+            echo "login successful";
+		    header("LOCATION: userHome.php");
+        }
+    }
+
+    if($_POST["submit"]=="Create User") {
+        if(create_user($uname, $password)) {
+            header("LOCATION: simplelogin.html");
+        }
+    }
 }
 
 $conn->close();
