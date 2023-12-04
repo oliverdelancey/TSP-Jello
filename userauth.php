@@ -32,18 +32,16 @@ if (empty($password)) {
 }
 
 if ($valid_input) {
-    if($_POST["submit"]=="Log in") {
-        if(authenticate_user($uname, $password)) {
-            echo "login successful";
-		    header('Location: userHome.php');
-        }
-    }
-
-    if($_POST["submit"]=="Create User") {
-        if(create_user($uname, $password)) {
-            header('Location: simplelogin.html');
-        }
-    }
+	if($_POST["submit"]=="Log in") {
+		authenticate_user($uname, $password);
+		header('Location:userHome.php');
+	}
+	
+	if($_POST["submit"]=="Create User") {
+		create_user($uname, $password);
+		header('Location:simplelogin.html');
+	}
+	exit;
 }
 
 $conn->close();
