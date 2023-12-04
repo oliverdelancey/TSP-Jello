@@ -45,6 +45,7 @@ if ($valid_input) {
 	}
 
 	header('Location: index.html');
+	exit;
 }
 
 $conn->close();
