@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 
-    function authenticateUser($username, $password){
+    function authenticate_user($username, $password){
         return null;
     }
 
@@ -38,7 +38,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function getColumns($projectid){
+    function get_columns($projectid){
         try{
 
             $statement = $conn->prepare(
@@ -61,7 +61,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function getTasks($columnid){
+    function get_tasks($columnid){
         try{
             $statement = $conn->prepare(
                "select id, priority, description, status, name, user_id
@@ -114,11 +114,35 @@ if ($conn->connect_error) {
         return null;
     }
     
-    function createTask($priority, $description, $columnid, $projectid){
+    //need to add code to add the user to their newly created project
+    function create_project($name, $end = null, $description){
+        try {
+            //$id = rand(1, 100000);
+
+            if($end <= 0){
+                throw new PDOException("End date needs to be greater than the current date and time");
+            }
+
+            $statement = $conn->prepare(
+                "insert into project 
+                    (name, start, end, id, description) 
+                    values (?, NOW(), NOW() + ?, RAND() * (100000 - 1) + 1, ?);"
+            );
+            
+            $statement->bind_param("sis", $name, $end, $description);
+
+            $result = $statement->execute();
+
+            return "Project created successfully!";
+        } catch (PDOException $e) {
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die();
+        }
+        
         return null;
     }
 
-    function createUser($username, $password){
+    function create_column($name, $projectid){
         return null;
     }
     
@@ -146,7 +170,7 @@ if ($conn->connect_error) {
     //i want this to orphan tasks to the default column
     //since it's "on delete cascade", move the tasks' column
     //ids to the default before deleting column
-    function deleteColumn($columnid, $defaultid){
+    function delete_column($columnid, $defaultid){
         return null;
     }
     
@@ -192,18 +216,18 @@ if ($conn->connect_error) {
         }
     }
 
-    function modifyProject($id, $name, $start, $end, $description){
+    function modify_project($id, $name, $start, $end, $description){
         return null;
     }
 
-    function modifyColumn($id, $name){
+    function modify_column($id, $name){
         return null;
     }
 
-    function modifyTaskAssignment($userid, $taskid){
+    function modify_task_assignment($userid, $taskid){
         return null;
     }
-    function createProjectAssignment($userid, $projectid){
+    function create_project_assignment($userid, $projectid){
         return null;
     }
     function delete_project_assignment($userid, $projectid){
