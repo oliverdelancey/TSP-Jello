@@ -64,18 +64,21 @@ if ($conn->connect_error) {
     function getTasks($columnid){
         try{
             $statement = $conn->prepare(
-                "select id, priority, description, status, user_id 
+               "select id, priority, description, status, name, user_id
                     from task
-                    inner join taskAssignments on id = task_id
+                    inner join (select name, task_id, user_id
+                        from users inner join taskAssignments on id = user_id) as a
+                        on id = task_id
                     where col_id = ?;
-                    "
+                "
             );
 
             $statement->bind_param("d", $columnid);
 
-            $result = $statement->execute();
+            $statement->execute();
+            $result = $statement->get_result();
 
-            return $row;
+            return $result;
         } catch(PDOException $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -83,7 +86,24 @@ if ($conn->connect_error) {
     }
 
     function getCollaborators($projectid){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "select name, id 
+                    from users
+                    inner join projectAssignments ? = proj_id and id = user_id;
+                    "
+            );
+
+            $statement->bind_param("d", $projectid);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
     }
 
     function createProject($name, $start, $end, $description){
@@ -102,7 +122,24 @@ if ($conn->connect_error) {
         return null;
     }
     
-    function deleteProject($columnid){
+    function deleteProject($projectid){
+        try{
+            $statement = $conn->prepare(
+                "delete from project
+                    where id = ?;
+                    "
+            );
+
+            $statement->bind_param("d", $projectid);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
         return null;
     }
     
@@ -113,12 +150,46 @@ if ($conn->connect_error) {
         return null;
     }
     
-    function deleteTask($columnid){
+    function deleteTask($taskid){
+        try{
+            $statement = $conn->prepare(
+                "delete from task
+                    where id = ?
+                    "
+            );
+
+            $statement->bind_param("d", $projectid);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
         return null;
     }
 
     function modifyTask($id, $priority, $description, $status, $columnid){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "update task
+                    set col_id = ?, priority = ?, description = ? status = ?
+                    where id = ?;
+                    "
+            );
+
+            $statement->bind_param("ddssd", $columnid, $priority, $description, $status, $id);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(PDOException $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            die(); 
+        }
     }
 
     function modifyProject($id, $name, $start, $end, $description){
