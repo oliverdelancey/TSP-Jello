@@ -28,14 +28,21 @@ if (empty($password)) {
 	$valid_input = false;
 }
 if ($valid_input) {
-	echo('<p>VALID INPUT</p>');
+
+	if(isset($_POST["submit"])) {
+		if($_POST["submit"]==="Log in") {
+			echo('<p>RUNS LOG IN</p>');
+			
+		} else if($_POST["submit"]==="Create User") {
+			echo('<p>RUNS CREATE USER</p>');
+		}
+	}
 	
 	$query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
 	$query->bind_param("s", $uname);
 	$query->execute();
 	$result = $query->get_result();
 	$isSuccess = false;
-	echo('<p>BEFORE SUCCESS TEST</p>');
 	
 	while ($row = $result->fetch_assoc()) {
 		if (!empty($row)) {
@@ -45,18 +52,17 @@ if ($valid_input) {
 			}
 		}
 	}
-
-	echo('<p>AFTER SUCCESS TEST</p>');
+	
 	if ($isSuccess) {
 		echo "login successful";
 		header("LOCATION: userHome.php");
 	} else {
 		echo "login failed";
 	}
-	echo('<p>AFTER FAILURE</p>');
 }
+
 $conn->close();
-echo('<p>CONN CLOSED</p>');
+
 ?>
 </body>
 </html>
