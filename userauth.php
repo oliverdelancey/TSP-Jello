@@ -35,12 +35,13 @@ if ($valid_input) {
 			echo('<p>RUNS LOG IN</p>');
 			
 		} else if($_POST["submit"]==="Create User") {
+			echo('<p>RUNS CREATE USER</p>');
 			ob_start();
 			$functionOutput = create_user($uname, $password);
 			$errorMessage = ob_get_clean();
 			
 			if ($errorMessage) {
-				echo "Error creating user: ".$errorMessage;
+				echo "<p>Error creating user: ".$errorMessage."</p>";
 			} else {
 				header("LOCATION: simplelogin.html");
 			}
