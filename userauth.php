@@ -3,6 +3,7 @@
 <?php
 var_dump($_POST);
 include "database.php";
+include "db.php";
 session_start();
 #session_start();
 
@@ -34,7 +35,15 @@ if ($valid_input) {
 			echo('<p>RUNS LOG IN</p>');
 			
 		} else if($_POST["submit"]==="Create User") {
-			echo('<p>RUNS CREATE USER</p>');
+			ob_start();
+			$functionOutput = create_user($uname, $password);
+			$errorMessage = ob_get_clean();
+			
+			if ($errorMessage) {
+				echo "Error creating user: ".$errorMessage;
+			} else {
+				header("LOCATION: simplelogin.html");
+			}
 		}
 	}
 	
