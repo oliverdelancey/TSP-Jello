@@ -13,7 +13,23 @@ if ($conn->connect_error) {
 
 
     function authenticate_user($username, $password){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "select id
+                    from users
+                    where name = ? and password = sha2(?, 256);
+                    "
+            );
+
+            $statement->bind_param("ss", $username, $password);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>";  
+        }
     }
 
 
@@ -32,7 +48,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
@@ -55,7 +71,7 @@ if ($conn->connect_error) {
 
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
@@ -79,7 +95,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
@@ -100,7 +116,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
@@ -120,7 +136,7 @@ if ($conn->connect_error) {
             //$id = rand(1, 100000);
 
             if($end <= 0){
-                throw new PDOException("End date needs to be greater than the current date and time");
+                throw new mysqli_sql_exception("End date needs to be greater than the current date and time");
             }
 
             $statement = $conn->prepare(
@@ -134,7 +150,7 @@ if ($conn->connect_error) {
             $result = $statement->execute();
 
             return "Project created successfully!";
-        } catch (PDOException $e) {
+        } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>"; 
             die();
         }
@@ -147,7 +163,22 @@ if ($conn->connect_error) {
     }
 
     function create_user($username, $password){
-        return null;
+        try{
+            $statement = $conn->prepare(
+                "insert into users
+                    values (?, RAND() * (100000 - 1) + 1, sha256(?, 256);
+                    "
+            );
+
+            $statement->bind_param("ss", $username, $password);
+
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result;
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>";  
+        }
     }
     
     function delete_project($projectid){
@@ -164,11 +195,10 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
-        return null;
     }
     
     //i want this to orphan tasks to the default column
@@ -192,7 +222,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
@@ -214,7 +244,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
             return $result;
-        } catch(PDOException $e){
+        } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
