@@ -7,8 +7,11 @@ session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-@@ -14,7 +14,7 @@
-
+error_reporting(E_ALL);
+$conn = new mysqli($server, $username, $password, $database);
+if ($conn->connect_error) {
+	die("connection failed: " . $conn->connect_error);
+}
 
 $uname = $_POST["uname"];
 $_SESSION["uname"]=$_POST["uname"];
