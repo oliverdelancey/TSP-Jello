@@ -3,7 +3,6 @@
 <?php
 var_dump($_POST);
 include "database.php";
-include "db.php";
 session_start();
 #session_start();
 
