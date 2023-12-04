@@ -32,23 +32,31 @@ if (empty($password)) {
 	$valid_input = false;
 }
 
+
 if ($valid_input) {
-	if($_POST["Submit"]=='Log in') {
+
+	echo("validated");
+	if(isset($_POST["submit"])) {
+
+		echo("submitted");
+	}
+	if($_POST["submit"]=='Log in') {
+		echo("Logged in");
 		#authenticate_user($uname, $password);
 		header('Location: userHome.php');
-		exit;
 	}
 	
-	if($_POST["Submit"]=='Create User') {
+	if($_POST["submit"]=='Create User') {
+		echo("Created");
 		#create_user($uname, $password);
 		header('Location: simplelogin.html');
-		exit;
 	}
 
+	echo("Not redirected");
 	header('Location: index.html');
-	exit;
+	exit();
 }
-
+echo("not valid");
 $conn->close();
 
 ?>
