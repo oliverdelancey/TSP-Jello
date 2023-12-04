@@ -43,6 +43,8 @@ if ($valid_input) {
 		header('Location: simplelogin.html');
 		exit;
 	}
+
+	header('Location: index.html');
 }
 
 $conn->close();
