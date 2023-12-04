@@ -1,6 +1,7 @@
 <html>
 <body>
 <?php
+var_dump($_POST);
 include "database.php";
 include "db.php";
 #session_start();
