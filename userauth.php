@@ -50,7 +50,7 @@ if ($valid_input) {
 				if ($isSuccess) {
 					header("LOCATION: userHome.php");
 				} else {
-					print "login failed";
+					header("LOCATION: simplelogin.html?error=1");
 				}
 			} catch(mysqli_sql_exception $e){
 		            print "Error! " . $e->getMessage() . "<br/>";  
