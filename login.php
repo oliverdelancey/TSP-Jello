@@ -31,14 +31,14 @@
                     <php
                       if(isset($_GET['error'])) {
                             if($_GET['error']===1) {
-                                    echo('<p style="color: red">' . htmlspecialchars('Invalid username or password') . '</p>');
+                                    echo('<p style="color:red">Invalid username or password</p>');
                             }
                       }
                     ?>
                     
                     <input type="submit" name="submit" id="submit" value="Log in"><br>
                 </form>
-                <label for="register" id="register"><p>Don't have an account? <a href="http://syenite.net/register.html">Register</a></p></label>
+                <label for="register" id="register"><p style="color:#202022"">Don't have an account? <a href="http://syenite.net/register.html">Register</a></p></label>
             </div>
         </div>
 
