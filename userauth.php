@@ -54,11 +54,15 @@ if ($valid_input) {
 			}
 		} else if($_POST["submit"]==="Create User") {
 			try{
-			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, sha256(?, 256));');
+
+				$hashed_password = hash('sha256', $password);
+				
+			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, ?);');
 			
-			        $statement->bind_param("ss", $username, $password);
+			        $statement->bind_param("ss", $username, $hashed_password);
 			
 			        $statement->execute();
+				
 			        $result = $statement->get_result();
 	
 				header("LOCATION: simplelogin.html");
