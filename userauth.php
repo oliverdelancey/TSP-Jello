@@ -31,27 +31,30 @@ if ($valid_input) {
 
 	if(isset($_POST["submit"])) {
 		if($_POST["submit"]==="Log in") {
-			$query = $conn->prepare('SELECT username, password FROM users WHERE username = ?');
-			$query->bind_param("s", $uname);
-			$query->execute();
-			$result = $query->get_result();
-			$isSuccess = false;
-			
-			while ($row = $result->fetch_assoc()) {
-				if (!empty($row)) {
-					$hpassword = $row["password"];
-					if ($password == $hpassword) {
-						$isSuccess = true;
+			try {
+				$query = $conn->prepare('SELECT username, password FROM users WHERE username = ?');
+				$query->bind_param("s", $uname);
+				$query->execute();
+				$result = $query->get_result();
+				$isSuccess = false;
+				
+				while ($row = $result->fetch_assoc()) {
+					if (!empty($row)) {
+						$hpassword = $row["password"];
+						if (hash('sha256', $password) == $hpassword) {
+							$isSuccess = true;
+						}
 					}
 				}
-			}
-			
-			if ($isSuccess) {
-				print "login successful";
-				header("LOCATION: userHome.php");
-			} else {
-				print "login failed";
-			}
+				
+				if ($isSuccess) {
+					header("LOCATION: userHome.php");
+				} else {
+					print "login failed";
+				}
+			} catch(mysqli_sql_exception $e){
+		            print "Error! " . $e->getMessage() . "<br/>";  
+		        }
 		} else if($_POST["submit"]==="Create User") {
 			try{
 
@@ -68,7 +71,7 @@ if ($valid_input) {
 				header("LOCATION: simplelogin.html");
 			        return $result;
 		        } catch(mysqli_sql_exception $e){
-		            print "Error!" . $e->getMessage() . "<br/>";  
+		            print "Error! " . $e->getMessage() . "<br/>";  
 		        }
 		}
 	}
