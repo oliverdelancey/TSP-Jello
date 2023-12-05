@@ -29,11 +29,11 @@
                             onClick="this.value='';"><br><br>
 
                     <php
-                      if(isset($_GET['error'])) {
-                            if($_GET['error']===1) {
-                                    echo('<p style="color:red">Invalid username or password</p>');
-                            }
-                      }
+                        if(isset($_GET['error']) && $_GET['error']=="1") {
+                            echo('<p style="color:red">Invalid username or password</p>');
+                        } else {
+                            unset($_GET['error']);
+                        }
                     ?>
                     
                     <input type="submit" name="submit" id="submit" value="Log in"><br>
