@@ -1,6 +1,7 @@
 <?php
 
 include "database.php";
+session_start();
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -26,7 +27,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
@@ -47,7 +48,7 @@ if ($conn->connect_error) {
             $statement->execute(); 
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -70,7 +71,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -94,7 +95,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -115,7 +116,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -171,7 +172,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
@@ -190,7 +191,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -217,7 +218,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -239,7 +240,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -267,7 +268,7 @@ if ($conn->connect_error) {
                 $result1 = $statement->get_result();
                 $result1Row = $result1->fetch_row();
 
-                if($result1Row == null){
+                if($result1Row == null){ //entry doesn't exist 
                     $statement2 = $conn->prepare(
                         "insert into taskAssignment
                             values (?, ?);
@@ -276,7 +277,7 @@ if ($conn->connect_error) {
                     $statement2->bind_param("dd", $userid, $taskid);
                     $statement2->execute();
                     $result2 = $statement->get_result();
-                } else if($result1Row[0] == $userid){
+                } else if($result1Row[0] == $userid){ //entry has userid as the assignment
                     $statement2 = $conn->prepare(
                         "update taskAssignment
                             set user_id = NULL
@@ -286,7 +287,7 @@ if ($conn->connect_error) {
                     $statement2->bind_param("d", $taskid);
                     $statement2->execute();
                     $result2 = $statement->get_result();    
-                } else{
+                } else{ //entry has some other user or null as assignment 
                     $statement2 = $conn->prepare(
                         "update taskAssignment
                             set user_id = ?
@@ -321,7 +322,7 @@ if ($conn->connect_error) {
             $statement->execute(); 
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
         }
@@ -340,7 +341,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result;
+            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
