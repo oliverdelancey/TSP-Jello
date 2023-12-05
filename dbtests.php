@@ -7,6 +7,12 @@
 
 include "db.php";
 
+var_dump($_SESSION);
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 try{
     $statement = $conn->prepare(
         "select id from users where username = ?"
