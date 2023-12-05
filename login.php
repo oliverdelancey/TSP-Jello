@@ -28,7 +28,7 @@
                     <input type="password" id="password" name="password" placeholder="Type your password"
                             onClick="this.value='';"><br><br>
 
-                    <php
+                    <?php
                         if(isset($_GET['error']) && $_GET['error']=="1") {
                             echo('<p style="color:red">Invalid username or password</p>');
                         } else {
