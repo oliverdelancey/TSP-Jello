@@ -163,7 +163,7 @@ if ($conn->connect_error) {
         try{
             $statement = $conn->prepare(
                 "insert into users
-                    values (?, RAND() * (100000 - 1) + 1, sha2(?, 256);
+                    values (?, RAND() * (100000 - 1) + 1, sha2(?, 256));
                     "
             );
 
