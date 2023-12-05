@@ -50,7 +50,7 @@ if ($valid_input) {
 				if ($isSuccess) {
 					header("LOCATION: userHome.php");
 				} else {
-					header("LOCATION: simplelogin.html?error=1");
+					header("LOCATION: login.php?error=1");
 				}
 			} catch(mysqli_sql_exception $e){
 		            print "Error! " . $e->getMessage() . "<br/>";  
@@ -68,7 +68,7 @@ if ($valid_input) {
 				
 			        $result = $statement->get_result();
 	
-				header("LOCATION: simplelogin.html");
+				header("LOCATION: login.php");
 			        return $result;
 		        } catch(mysqli_sql_exception $e){
 		            print "Error! " . $e->getMessage() . "<br/>";  
