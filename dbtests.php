@@ -26,6 +26,9 @@ function print_array($array) {
 }
 
 try {
+    $conn->autocommit(false);
+    $committed = false;
+
     $statement = $conn->prepare(
         "select id from users where username = ?"
     );
@@ -81,9 +84,17 @@ try {
 
     // delete_project_assignment
 
+    $conn->commit();
+    $committed = true;
+
 } catch(PDOException $e) {
     print "Error!" . $e->getMessage() . "<br/>"; 
     die(); 
+} finally {
+    if ($committed) {
+        $conn->rollback();  // undo changes
+    }
+    $conn->autocommit(true);
 }
 
 
