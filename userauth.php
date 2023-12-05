@@ -59,7 +59,7 @@ if ($valid_input) {
 				
 			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, ?);');
 			
-			        $statement->bind_param("ss", $username, $hashed_password);
+			        $statement->bind_param("ss", $uname, $hashed_password);
 			
 			        $statement->execute();
 				
