@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 
 
     function authenticate_user($username, $password){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "select id
@@ -35,6 +36,7 @@ if ($conn->connect_error) {
 
 
     function get_projects($userid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "select name, start, end, id, description 
@@ -48,7 +50,7 @@ if ($conn->connect_error) {
             $statement->execute(); 
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -56,8 +58,8 @@ if ($conn->connect_error) {
     }
 
     function get_columns($projectid){
+        global $conn;
         try{
-
             $statement = $conn->prepare(
                 "select id, name 
                     from column 
@@ -71,7 +73,7 @@ if ($conn->connect_error) {
             $result = $statement->get_result();
 
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -79,6 +81,7 @@ if ($conn->connect_error) {
     }
 
     function get_tasks($columnid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                "select id, priority, description, status, name, user_id
@@ -95,7 +98,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -103,6 +106,7 @@ if ($conn->connect_error) {
     }
 
     function get_collaborators($projectid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "select name, id 
@@ -116,7 +120,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -125,6 +129,7 @@ if ($conn->connect_error) {
 
     //need to add code to add the user to their newly created project
     function create_project($name, $end = null, $description){
+        global $conn;
         try {
             //$id = rand(1, 100000);
 
@@ -152,14 +157,17 @@ if ($conn->connect_error) {
     }
 
     function create_column($name, $projectid){
+        global $conn;
         return null;
     }
 
     function create_task($priority, $description, $columnid, $projectid){
+        global $conn;
         return null;
     }
 
     function create_user($username, $password){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "insert into users
@@ -172,13 +180,14 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
     }
     
     function delete_project($projectid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "delete from project
@@ -191,7 +200,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -202,10 +211,12 @@ if ($conn->connect_error) {
     //since it's "on delete cascade", move the tasks' column
     //ids to the default before deleting column
     function delete_column($columnid, $defaultid){
+        global $conn;
         return null;
     }
     
     function delete_task($taskid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "delete from task
@@ -218,7 +229,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -227,6 +238,7 @@ if ($conn->connect_error) {
     }
 
     function modify_task($id, $priority, $description, $status, $columnid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "update task
@@ -240,7 +252,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -248,14 +260,17 @@ if ($conn->connect_error) {
     }
 
     function modify_project($id, $name, $start, $end, $description){
+        global $conn;
         return null;
     }
 
     function modify_column($id, $name){
+        global $conn;
         return null;
     }
 
     function modify_task_assignment($userid, $taskid){
+        global $conn;
         try{
             $conn->begin_transaction();
                 $statement1 = $conn->prepare(
@@ -310,6 +325,7 @@ if ($conn->connect_error) {
     }
 
     function create_project_assignment($userid, $projectid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "insert into projectAssignments
@@ -322,13 +338,14 @@ if ($conn->connect_error) {
             $statement->execute(); 
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
         }
     }
     
     function delete_project_assignment($userid, $projectid){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "remove from task
@@ -341,7 +358,7 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
