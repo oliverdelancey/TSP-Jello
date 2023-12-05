@@ -31,58 +31,38 @@ if ($valid_input) {
 
 	if(isset($_POST["submit"])) {
 		if($_POST["submit"]==="Log in") {
-			try{
-		            $statement = $conn->prepare(
-		                "select id
-		                    from users
-		                    where name = ? and password = sha2(?, 256);
-		                    "
-		            );
-		
-		            $statement->bind_param("ss", $username, $password);
-		
-		            $statement->execute();
-		            $result = $statement->get_result();
-		
-		            return $result;
-		        } catch(mysqli_sql_exception $e){
-		            print "Error!" . $e->getMessage() . "<br/>";  
-		        }
-			// $query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
-			// $query->bind_param("s", $uname);
-			// $query->execute();
-			// $result = $query->get_result();
-			// $isSuccess = false;
+			$query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
+			$query->bind_param("s", $uname);
+			$query->execute();
+			$result = $query->get_result();
+			$isSuccess = false;
 			
-			// while ($row = $result->fetch_assoc()) {
-			// 	if (!empty($row)) {
-			// 		$hpassword = $row["password"];
-			// 		if ($password == $hpassword) {
-			// 			$isSuccess = true;
-			// 		}
-			// 	}
-			// }
+			while ($row = $result->fetch_assoc()) {
+				if (!empty($row)) {
+					$hpassword = $row["password"];
+					if ($password == $hpassword) {
+						$isSuccess = true;
+					}
+				}
+			}
 			
-			// if ($isSuccess) {
-			// 	print "login successful";
-			// 	header("LOCATION: userHome.php");
-			// } else {
-			// 	print "login failed";
-			// }
+			if ($isSuccess) {
+				print "login successful";
+				header("LOCATION: userHome.php");
+			} else {
+				print "login failed";
+			}
 		} else if($_POST["submit"]==="Create User") {
 			try{
-		            $statement = $conn->prepare(
-		                "insert into users
-		                    values (?, RAND() * (100000 - 1) + 1, sha256(?, 256);
-		                    "
-		            );
-		
-		            $statement->bind_param("ss", $username, $password);
-		
-		            $statement->execute();
-		            $result = $statement->get_result();
-		
-		            return $result;
+			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, sha256(?, 256);');
+			
+			        $statement->bind_param("ss", $username, $password);
+			
+			        $statement->execute();
+			        $result = $statement->get_result();
+	
+				header("LOCATION: simplelogin.html");
+			        return $result;
 		        } catch(mysqli_sql_exception $e){
 		            print "Error!" . $e->getMessage() . "<br/>";  
 		        }
