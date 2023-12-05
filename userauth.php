@@ -54,7 +54,7 @@ if ($valid_input) {
 			}
 		} else if($_POST["submit"]==="Create User") {
 			try{
-			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, sha256(?, 256);');
+			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, sha256(?, 256));');
 			
 			        $statement->bind_param("ss", $username, $password);
 			
