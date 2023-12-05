@@ -1,3 +1,8 @@
+<html>
+<head>
+<title>DB PHP Tests</title>
+</head>
+<body>
 <?php
 
 include "db.php";
@@ -17,7 +22,7 @@ try{
     // tests
 
     $projects = get_projects($userid);
-    echo "function get_projects: " . $projects;
+    echo "<p>function get_projects: " . $projects . "</p>";
 
 } catch(PDOException $e){
     print "Error!" . $e->getMessage() . "<br/>"; 
@@ -26,3 +31,5 @@ try{
 
 
 ?>
+</body>
+</html>
