@@ -55,7 +55,7 @@ if ($valid_input) {
 		} else if($_POST["submit"]==="Create User") {
 			try{
 
-				$hashed_password = SHA2($password, 256);
+				$hashed_password = hash('sha256', $password);
 				
 			        $statement = $conn->prepare('INSERT INTO users VALUES (?, RAND() * (100000 - 1) + 1, ?);');
 			
