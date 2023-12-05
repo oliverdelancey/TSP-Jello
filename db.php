@@ -273,7 +273,7 @@ if ($conn->connect_error) {
                         "insert into taskAssignment
                             values (?, ?);
                         "
-                    )
+                    );
                     $statement2->bind_param("dd", $userid, $taskid);
                     $statement2->execute();
                     $result2 = $statement->get_result();
