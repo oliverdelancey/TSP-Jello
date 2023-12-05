@@ -31,7 +31,7 @@
                     <php
                       if(isset($_GET['error'])) {
                             if($_GET['error']===1) {
-                                    echo '<p style="color: red">' . htmlspecialchars('Invalid username or password') . '</p>';
+                                    echo('<p style="color: red">' . htmlspecialchars('Invalid username or password') . '</p>');
                             }
                       }
                     ?>
