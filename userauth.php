@@ -31,42 +31,62 @@ if ($valid_input) {
 
 	if(isset($_POST["submit"])) {
 		if($_POST["submit"]==="Log in") {
-			echo('<p>RUNS LOG IN</p>');
+			try{
+		            $statement = $conn->prepare(
+		                "select id
+		                    from users
+		                    where name = ? and password = sha2(?, 256);
+		                    "
+		            );
+		
+		            $statement->bind_param("ss", $username, $password);
+		
+		            $statement->execute();
+		            $result = $statement->get_result();
+		
+		            return $result;
+		        } catch(mysqli_sql_exception $e){
+		            print "Error!" . $e->getMessage() . "<br/>";  
+		        }
+			// $query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
+			// $query->bind_param("s", $uname);
+			// $query->execute();
+			// $result = $query->get_result();
+			// $isSuccess = false;
 			
+			// while ($row = $result->fetch_assoc()) {
+			// 	if (!empty($row)) {
+			// 		$hpassword = $row["password"];
+			// 		if ($password == $hpassword) {
+			// 			$isSuccess = true;
+			// 		}
+			// 	}
+			// }
+			
+			// if ($isSuccess) {
+			// 	print "login successful";
+			// 	header("LOCATION: userHome.php");
+			// } else {
+			// 	print "login failed";
+			// }
 		} else if($_POST["submit"]==="Create User") {
-			echo('<p>RUNS CREATE USER</p>');
-			ob_start();
-			$functionOutput = create_user($uname, $password);
-			$errorMessage = ob_get_clean();
-			
-			if ($errorMessage) {
-				echo "<p>Error creating user: ".$errorMessage."</p>";
-			} else {
-				header("LOCATION: simplelogin.html");
-			}
+			try{
+		            $statement = $conn->prepare(
+		                "insert into users
+		                    values (?, RAND() * (100000 - 1) + 1, sha256(?, 256);
+		                    "
+		            );
+		
+		            $statement->bind_param("ss", $username, $password);
+		
+		            $statement->execute();
+		            $result = $statement->get_result();
+		
+		            return $result;
+		        } catch(mysqli_sql_exception $e){
+		            print "Error!" . $e->getMessage() . "<br/>";  
+		        }
 		}
-	}
-	
-	$query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
-	$query->bind_param("s", $uname);
-	$query->execute();
-	$result = $query->get_result();
-	$isSuccess = false;
-	
-	while ($row = $result->fetch_assoc()) {
-		if (!empty($row)) {
-			$hpassword = $row["password"];
-			if ($password == $hpassword) {
-				$isSuccess = true;
-			}
-		}
-	}
-	
-	if ($isSuccess) {
-		echo "login successful";
-		header("LOCATION: userHome.php");
-	} else {
-		echo "login failed";
 	}
 }
 
