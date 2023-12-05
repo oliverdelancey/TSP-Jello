@@ -31,7 +31,7 @@ if ($valid_input) {
 
 	if(isset($_POST["submit"])) {
 		if($_POST["submit"]==="Log in") {
-			$query = $conn->prepare("SELECT username, password FROM users WHERE username = ?");
+			$query = $conn->prepare('SELECT username, password FROM users WHERE username = ?');
 			$query->bind_param("s", $uname);
 			$query->execute();
 			$result = $query->get_result();
