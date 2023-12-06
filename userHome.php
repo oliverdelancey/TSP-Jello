@@ -185,8 +185,11 @@
 
     <?php
         #display_projects();
+        if(isset($_SESSION)){
+            print("test 3");
+            print($_SESSION["uname"]);
+        }
     ?>  
-    <p> test2 </p>
     <!--TODO:
         Button that leads to project creation page
     -->
