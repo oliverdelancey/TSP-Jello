@@ -189,7 +189,7 @@
         //$userid = $uid[0];
         echo "<pre>"; echo $uid . "</pre>";
 
-        $userProjects = get_projects($uid[0]);
+        $userProjects = get_projects($uid);
         echo "<pre>"; print_r($userProjects); echo "</pre>";
 
         for($i = 0; $i < sizeof($userProjects); $i++){
