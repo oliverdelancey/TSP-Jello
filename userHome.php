@@ -147,9 +147,10 @@
         }
     }*/
     
-        echo "<p>The username should be here: $_SESSION["uname"] </p>";
+        //echo "<p>The username should be here: $_SESSION["uname"] </p>";
         print(isset($_SESSION["uname"]))
-        print($userid)/*
+        //print($userid)
+        /*
         if (!isset($_SESSION["uname"])) {
                 #header("LOCATION: index.html");
         } */
