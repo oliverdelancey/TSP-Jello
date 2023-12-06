@@ -103,9 +103,10 @@
             $statement->bind_param("d", $_SESSION["uname"]);
         
             $statement->execute(); 
-            $statement->bind_result($uid);
-            $statement->fetch();
-            $statement->close();
+            
+            $result = $statement->get_result();
+
+            return $result->fetch_all();
 
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
@@ -181,8 +182,8 @@
 
     <?php
         #display_projects();
-        getUserID($_SESSION["uname"]);
-        $projects = get_projects($uid);
+        $uid = getUserID($_SESSION["uname"]);
+        $projects = get_projects($uid[0]);
 
         for($i = 0; $i < sizeof($projects); $i++){
             echo "<tr>";
