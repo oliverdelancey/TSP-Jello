@@ -28,11 +28,12 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->get_all();
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
     }
+    
 
 
     function get_projects($userid){
@@ -191,7 +192,7 @@ if ($conn->connect_error) {
 
             $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
             $statement->execute();
-            $results = $statement->get_results();
+            $result = $statement->get_result();
 
             return $result->fetch_all();
 
@@ -317,7 +318,7 @@ if ($conn->connect_error) {
                 );
                 $statement1->bind_param("d", $taskid);
                 $statement1->execute();
-                $result1 = $statement->get_result();
+                $result1 = $statement1->get_result();
                 $result1Row = $result1->fetch_row();
 
                 if($result1Row == null){ //entry doesn't exist 
@@ -328,7 +329,7 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("dd", $userid, $taskid);
                     $statement2->execute();
-                    $result2 = $statement->get_result();
+                    $result2 = $statement2->get_result();
                 } else if($result1Row[0] == $userid){ //entry has userid as the assignment
                     $statement2 = $conn->prepare(
                         "update taskAssignment
@@ -338,7 +339,7 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("d", $taskid);
                     $statement2->execute();
-                    $result2 = $statement->get_result();    
+                    $result2 = $statement2->get_result();    
                 } else{ //entry has some other user or null as assignment 
                     $statement2 = $conn->prepare(
                         "update taskAssignment
@@ -348,7 +349,7 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("dd", $userid, $taskid);
                     $statement2->execute();
-                    $result2 = $statement->get_result();
+                    $result2 = $statement2->get_result();
                 }
 
             $conn->commit();
