@@ -184,9 +184,11 @@
         #display_projects();
         $uid = getUserID($_SESSION["uname"]);
         echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
-        echo "<pre>"; print($uid[0]); echo "</pre>";
+        echo "<pre>"; print_r($uid[0]); echo "</pre>";
+        $userid = $uid[0];
+        echo "<pre>"; print($userid); echo "</pre>";
 
-        $userProjects = get_projects($uid[0]);
+        $userProjects = get_projects($uid);
         echo "<pre>"; print_r($userProjects); echo "</pre>";
 
         for($i = 0; $i < sizeof($userProjects); $i++){
