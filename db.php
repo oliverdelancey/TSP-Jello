@@ -138,9 +138,10 @@ if ($conn->connect_error) {
             }
 
             $statement = $conn->prepare(
-                "insert into project 
-                    (name, start, end, id, description) 
-                    values (?, NOW(), NOW() + ?, RAND() * (100000 - 1) + 1, ?);"
+                "insert into 
+                    project (name, start, end, id, description) 
+                    values (?, NOW(), NOW() + ?, RAND() * (100000 - 1) + 1, ?);
+                    "
             );
             
             $statement->bind_param("sis", $name, $end, $description);
@@ -158,6 +159,24 @@ if ($conn->connect_error) {
 
     function create_column($name, $projectid){
         global $conn;
+        try {
+            $statement = $conn->prepare(
+                "insert into 
+                    col (id, proj_id, name)
+                    values (RAND() * (100000 - 1) + 1, ?, ?);
+                    "
+            );
+            
+            $statement->bind_param("is", $projectid, $name)
+            $statement->execute();
+            $result = $statement->get_result();
+            
+            return $result->fetch_all();
+            
+        } catch (mysqli_sql_exception $e) {
+            print "Error!" . $e->getMessage() . "<br/r>";
+            die();
+        }
         return null;
     }
 
