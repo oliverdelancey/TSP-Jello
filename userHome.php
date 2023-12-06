@@ -80,9 +80,9 @@
     
     <?php 
     include "database.php";
-    /*if(!isset($_SESSION)){
+    if(!isset($_SESSION)){
         session_start();
-    }*/
+    }
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -160,7 +160,7 @@
         } */
     
         if ( isset($_POST["logout"]) ) {
-            #session_destroy();
+            session_destroy();
             header("LOCATION: index.html");
         }
 
