@@ -181,7 +181,7 @@
 
     <?php
         #display_projects();
-        
+        getUserID($_SESSION["uname"]);
         $projects = get_projects($uid);
 
         for($i = 0; $i < sizeof($projects); $i++){
