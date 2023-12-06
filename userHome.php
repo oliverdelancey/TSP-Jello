@@ -100,7 +100,7 @@
                 "select id from users where username = ?"
             );
         
-            $statement->bind_param("d", $_SESSION["uname"]);
+            $statement->bind_param("s", $_SESSION["uname"]);
         
             $statement->execute(); 
             
@@ -184,6 +184,7 @@
         #display_projects();
         $uid = getUserID($_SESSION["uname"]);
         echo "<pre>"; print($uid); echo "</pre>";
+        echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
         echo "<pre>"; print_r($uid); echo "</pre>";
         $projects = get_projects($uid[0]);
         echo "<pre>"; print_r($projects); echo "</pre>";
