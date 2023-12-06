@@ -185,7 +185,7 @@
 
     <?php
         #display_projects();
-        if(isset($_SESSION)){
+        if(isset($_SESSION["uname"])){
             print("test 3");
             print($_SESSION["uname"]);
         }
