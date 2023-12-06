@@ -80,6 +80,9 @@
     
     <?php 
     include "database.php";
+    if(!isset($_SESSION)){
+        session_start();
+    }
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -150,6 +153,7 @@
         //echo "<p>The username should be here: $_SESSION["uname"] </p>";
         print(isset($_SESSION["uname"]))
         //print($userid)
+
         /*
         if (!isset($_SESSION["uname"])) {
                 #header("LOCATION: index.html");
