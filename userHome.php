@@ -105,8 +105,9 @@
             $statement->execute(); 
             
             $result = $statement->get_result();
+            $row = $result->fetch_assoc();
 
-            return $result->fetch_all();
+            return $row["id"];
 
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
@@ -186,7 +187,7 @@
         //echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
         //echo "<pre>"; print_r($uid[0]); echo "</pre>";
         //$userid = $uid[0];
-        echo "<pre>"; echo $uid[0] . "</pre>";
+        echo "<pre>"; echo $uid . "</pre>";
 
         $userProjects = get_projects($uid[0]);
         echo "<pre>"; print_r($userProjects); echo "</pre>";
