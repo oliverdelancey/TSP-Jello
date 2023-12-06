@@ -151,14 +151,14 @@
         }
     }*/
 
-        /*
+        
         if (!isset($_SESSION["uname"])) {
-                #header("LOCATION: index.html");
-        } */
+            header("LOCATION: login.php");
+        }
     
         if ( isset($_POST["logout"]) ) {
-            #session_destroy();
-            header("LOCATION: index.html");
+            session_destroy();
+            header("LOCATION: login.php");
         }
 
         
@@ -183,7 +183,10 @@
     <?php
         #display_projects();
         $uid = getUserID($_SESSION["uname"]);
+        echo "<pre>"; print($uid); echo "</pre>";
+        echo "<pre>"; print_r($uid); echo "</pre>";
         $projects = get_projects($uid[0]);
+        echo "<pre>"; print_r($projects); echo "</pre>";
 
         for($i = 0; $i < sizeof($projects); $i++){
             echo "<tr>";
