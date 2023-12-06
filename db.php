@@ -150,7 +150,7 @@ if ($conn->connect_error) {
 
             return "Project created successfully!";
         } catch (mysqli_sql_exception $e) {
-            print "Error!" . $e->getMessage() . "<br/>"; 
+            print "Error! " . $e->getMessage() . "<br/>"; 
             die();
         }
         
@@ -161,27 +161,45 @@ if ($conn->connect_error) {
         global $conn;
         try {
             $statement = $conn->prepare(
-                "insert into 
-                    col (id, proj_id, name)
-                    values (RAND() * (100000 - 1) + 1, ?, ?);
-                    "
+                "insert into col 
+                    (id, proj_id, name)
+                    values (RAND() * (100000 - 1) + 1, ?, ?);"
             );
-            
-            $statement->bind_param("is", $projectid, $name)
+
+            $statement->bind_param("is", $projectid, $name);
             $statement->execute();
             $result = $statement->get_result();
             
             return $result->fetch_all();
             
         } catch (mysqli_sql_exception $e) {
-            print "Error!" . $e->getMessage() . "<br/r>";
+            print "Error! " . $e->getMessage() . "<br/r>";
             die();
         }
         return null;
     }
 
-    function create_task($priority, $description, $columnid, $projectid){
+    function create_task($columnid, $projectid, $priority = 3, $description){
         global $conn;
+
+        try {
+            $statement = $conn->prepare(
+                "insert into task 
+                (id, col_id, proj_id, priority, description)
+                    values (RAND() * (100000 - 1) + 1, ?, ?, ?, ?);"
+            );
+
+            $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
+            $statement->execute();
+            $results = $statement->get_results();
+
+            return $result->fetch_all();
+
+        } catch (mysqli_sql_exception $e) {
+            print "Error! " . $e->getMessage() . "<br/r>";
+            die();
+        }
+
         return null;
     }
 
