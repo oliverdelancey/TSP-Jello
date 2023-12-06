@@ -80,6 +80,7 @@
     
     <?php 
     include "database.php";
+    include "db.php";
     if(!isset($_SESSION)){
         session_start();
     }
@@ -101,7 +102,7 @@
             $statement->bind_param("d", $_SESSION["uname"]);
         
             $statement->execute(); 
-            $statement->bind_result($userid);
+            $statement->bind_result($uid);
             $statement->fetch();
             $statement->close();
 
@@ -109,7 +110,6 @@
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
-
 
     }
 
@@ -149,10 +149,6 @@
             die(); 
         }
     }*/
-    
-        //echo "<p>The username should be here: $_SESSION["uname"] </p>";
-        //print(isset($_SESSION["uname"]))
-        //print($userid)
 
         /*
         if (!isset($_SESSION["uname"])) {
@@ -185,11 +181,32 @@
 
     <?php
         #display_projects();
-        if(isset($_SESSION["uname"])){
-            print("test 3");
-            print($_SESSION["uname"]);
+        $projects = get_projects($uid);
+
+        for(int $i = 0; $i < sizeof($projects); $i++){
+            echo "<tr>";
+            
+            echo "<td>";
+            print $projects[$i][0]; 
+            echo "</td>";
+
+            echo "<td>";
+            print $projects[$i][1]; 
+            echo "</td>";
+            
+            echo "<td>";
+            print $projects[$i][2];
+            echo "</td>";
+
+            echo "<td>";
+            print $projects[$i][3]; 
+            echo "</td>";
+
+            echo "</tr>";
         }
+        echo "</table>";
     ?>  
+    </table>
     <!--TODO:
         Button that leads to project creation page
     -->
