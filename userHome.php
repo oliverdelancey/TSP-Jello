@@ -94,6 +94,7 @@
     }
     
     function getUserID($username){
+        global $conn;
         try{
             $statement = $conn->prepare(
                 "select id from users where username = ?"
@@ -106,7 +107,6 @@
             $statement->fetch();
             $statement->close();
 
-            return $result->get_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
         }
@@ -181,9 +181,10 @@
 
     <?php
         #display_projects();
+        
         $projects = get_projects($uid);
 
-        for(int $i = 0; $i < sizeof($projects); $i++){
+        for($i = 0; $i < sizeof($projects); $i++){
             echo "<tr>";
             
             echo "<td>";
