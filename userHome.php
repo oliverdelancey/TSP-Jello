@@ -88,18 +88,39 @@
     if ($conn->connect_error) {
     	die("connection failed: " . $conn->connect_error);
     }
-    $uid = 1111;
+    
+    function getUserID($username){
+        try{
+            $statement = $conn->prepare(
+                "select id from users where username = ?"
+            );
+        
+            $statement->bind_param("d", $_SESSION["uname"]);
+        
+            $statement->execute(); 
+            $statement->bind_result($userid);
+            $statement->fetch();
+            $statement->close();
+
+            return $result->get_all();
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>";  
+        }
+
+
+    }
+
+    /*
     function display_projects(){
         try{
-            $query = $conn->prepare("SELECT name, description, start, end
+            $statement = $conn->prepare("select name, description, start, end
             FROM project 
-            INNER JOIN projectAssignments ON id = proj_id AND :uid = user_id;
+            INNER JOIN projectAssignments ON id = proj_id AND 1111 = user_id;
             ");
-	        $query->bind_param(":uid", $uid);
-	        $query->execute();
-	        $result = $query->get_result();
+	        $statement->bind_param(":uid", $uid);
+	        $result = $statement->execute();
     
-            while ($row = $query->fetch()){
+            while ($row = $statement->fetch()){
                 echo "<tr>";
                 $data = $row[0] . "\t";
                 echo "<td>";
@@ -124,12 +145,14 @@
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
-    }
-    /*
+    }*/
+    
         echo "<p>The username should be here: $_SESSION["uname"] </p>";
+        print(isset($_SESSION["uname"]))
+        print($userid)
         if (!isset($_SESSION["uname"])) {
                 #header("LOCATION: index.html");
-        } */ 
+        } *
     
         if ( isset($_POST["logout"]) ) {
             #session_destroy();
