@@ -183,29 +183,29 @@
     <?php
         #display_projects();
         $uid = getUserID($_SESSION["uname"]);
-        echo "<pre>"; print($uid); echo "</pre>";
         echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
-        echo "<pre>"; print_r($uid); echo "</pre>";
-        $projects = get_projects($uid[0]);
-        echo "<pre>"; print_r($projects); echo "</pre>";
+        echo "<pre>"; print($uid[0]); echo "</pre>";
 
-        for($i = 0; $i < sizeof($projects); $i++){
+        $userProjects = get_projects($uid[0]);
+        echo "<pre>"; print_r($userProjects); echo "</pre>";
+
+        for($i = 0; $i < sizeof($userProjects); $i++){
             echo "<tr>";
             
             echo "<td>";
-            print $projects[$i][0]; 
+            print $userProjects[$i][0]; 
             echo "</td>";
 
             echo "<td>";
-            print $projects[$i][1]; 
+            print $userProjects[$i][1]; 
             echo "</td>";
             
             echo "<td>";
-            print $projects[$i][2];
+            print $userProjects[$i][2];
             echo "</td>";
 
             echo "<td>";
-            print $projects[$i][3]; 
+            print $userProjects[$i][3]; 
             echo "</td>";
 
             echo "</tr>";
