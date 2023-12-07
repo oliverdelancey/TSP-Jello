@@ -187,7 +187,7 @@
   <?php
   
     if ( isset($_POST["delete"]) ) {
-        print($_POST["projID"]);
+        echo "<pre>"; print($_POST["projID"]); echo "</pre>";
     }
   
   ?>
