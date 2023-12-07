@@ -199,10 +199,10 @@
   <?php
   
     if ( isset($_POST["create"]) ) {
-        echo "<pre>"; print($_POST["title"]); echo "</pre>";
-        echo "<pre>"; print($_POST["description"]); echo "</pre>";
-        echo "<pre>"; print($_POST["startDate"]); echo "</pre>";
-        echo "<pre>"; print($_POST["endDate"]); echo "</pre>";
+        echo "<pre style='color:white'>"; print($_POST["title"]); echo "</pre>";
+        echo "<pre style='color:white'>"; print($_POST["description"]); echo "</pre>";
+        echo "<pre style='color:white'>"; print($_POST["startDate"]); echo "</pre>";
+        echo "<pre style='color:white'>"; print($_POST["endDate"]); echo "</pre>";
     }
   
   ?>
