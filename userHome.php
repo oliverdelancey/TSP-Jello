@@ -186,7 +186,7 @@
 
   <?php
   
-    if ( isset($_POST["delete" . $thisProject]) ) {
+    if ( isset($_POST["delete"]) ) {
         print($_POST["projID"]);
     }
   
