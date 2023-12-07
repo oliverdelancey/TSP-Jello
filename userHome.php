@@ -168,8 +168,9 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<input type = 'hidden' name = projID value = " . $userProjects[$i][3] . ">";
-                echo "<input type = 'submit' value ='Delete Project' name ='delete'>";
+                //echo "<input type = 'hidden' name = projID value = " . $userProjects[$i][3] . ">";
+                //echo "<input type = 'submit' value ='Delete Project' name ='delete'>";
+                echo "<input type='button' onclick='alert('Project ID: " . $userProjects[$i][3] . "')' value='Delete Project'>";
                 echo "</td>";
 
                 echo "</tr>";
@@ -186,9 +187,10 @@
 
   <?php
   
-    if ( isset($_POST["delete"]) ) {
-        echo "<pre>"; print($_POST["projID"]); echo "</pre>";
-    }
+    /*if ( isset($_POST["delete"]) ) {
+        echo "<pre>" . $_POST["projID"] . "</pre>";
+        echo '<p style="color:red">test</p>';
+    }*/
   
   ?>
 </html>
