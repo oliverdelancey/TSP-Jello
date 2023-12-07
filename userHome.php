@@ -201,10 +201,14 @@
   <?php
   
     if ( isset($_POST["create"]) ) {
+
+        $start = date("Y-m-d H:i:s", strtotime($_POST["startDate"]));
+        $end = date("Y-m-d H:i:s", strtotime($_POST["endDate"]));
+
         echo "<pre style='color:white'>"; print($_POST["title"]); echo "</pre>";
         echo "<pre style='color:white'>"; print($_POST["description"]); echo "</pre>";
-        echo "<pre style='color:white'>"; print($_POST["startDate"]); echo "</pre>";
-        echo "<pre style='color:white'>"; print($_POST["endDate"]); echo "</pre>";
+        echo "<pre style='color:white'>"; print($start); echo "</pre>";
+        echo "<pre style='color:white'>"; print($end); echo "</pre>";
     }
   
   ?>
