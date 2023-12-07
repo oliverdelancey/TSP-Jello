@@ -183,7 +183,7 @@
     <!--TODO:
         Button that leads to project creation page
     -->
-  </body>
+</body>
 
   <?php
   

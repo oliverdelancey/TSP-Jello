@@ -99,7 +99,7 @@ if ($conn->connect_error) {
             $statement->execute();
             
 
-            return "Task Created successfully!"
+            return "Task Created successfully!";
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -177,7 +177,7 @@ if ($conn->connect_error) {
             $statement->bind_param("is", $projectid, $name);
             $statement->execute();
             
-            return "Column created successfully!"
+            return "Column created successfully!";
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
@@ -199,7 +199,7 @@ if ($conn->connect_error) {
             $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
             $statement->execute();
 
-            return "Task created successfully!"
+            return "Task created successfully!";
 
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
