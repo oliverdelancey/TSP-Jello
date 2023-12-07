@@ -97,9 +97,9 @@ if ($conn->connect_error) {
             $statement->bind_param("d", $columnid);
 
             $statement->execute();
-            $result = $statement->get_result();
+            
 
-            return $result->fetch_all();
+            return "Task Created successfully!"
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -128,31 +128,40 @@ if ($conn->connect_error) {
         }
     }
 
-    //need to add code to add the user to their newly created project
     function create_project($name, $end = null, $description, $userid){
         global $conn;
+        
         try {
-            //$id = rand(1, 100000);
-
-            if($end <= 0){
-                throw new mysqli_sql_exception("End date needs to be greater than the current date and time");
-            }
-
-            $statement = $conn->prepare(
-                "insert into 
-                    project (name, start, end, id, description) 
-                    values (?, NOW(), NOW() + ?, RAND() * (100000 - 1) + 1, ?);
-                    "
-            );
+            $conn->begin_transaction();
             
-            $statement->bind_param("sis", $name, $end, $description);
+                // creates random id number for the project
+                $projectid = rand(1,100000);
+                
+                //create a project for the user
+                if($end <= 0){
+                    throw new mysqli_sql_exception("End date needs to be greater than the current date and time");
+                }
 
-            $result = $statement->execute();
+                $statement1 = $conn->prepare(
+                    "insert into 
+                        project (name, start, end, id, description) 
+                        values (?, NOW(), NOW() + ?, ?, ?);
+                    "
+                );
+                
+                $statement1->bind_param("siis", $name, $end, $projectid, $description);
+                $statement1->execute();
+                
+                //assign user to the project
+                create_project_assignment($userid, $projectid);
 
+            $conn->commit();
             return "Project created successfully!";
+
         } catch (mysqli_sql_exception $e) {
-            print "Error! " . $e->getMessage() . "<br/>"; 
-            die();
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            $conn->rollback();
+            return $e->getCode();
         }
     }
 
@@ -167,9 +176,8 @@ if ($conn->connect_error) {
 
             $statement->bind_param("is", $projectid, $name);
             $statement->execute();
-            $result = $statement->get_result();
             
-            return $result->fetch_all();
+            return "Column created successfully!"
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
@@ -183,15 +191,15 @@ if ($conn->connect_error) {
         try {
             $statement = $conn->prepare(
                 "insert into task 
-                (id, col_id, proj_id, priority, description)
-                    values (RAND() * (100000 - 1) + 1, ?, ?, ?, ?);"
+                    (id, col_id, proj_id, priority, description)
+                    values (RAND() * (100000 - 1) + 1, ?, ?, ?, ?);
+                "
             );
 
             $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
             $statement->execute();
-            $result = $statement->get_result();
 
-            return $result->fetch_all();
+            return "Task created successfully!"
 
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
@@ -205,7 +213,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                 "insert into users
                     values (?, RAND() * (100000 - 1) + 1, sha2(?, 256));
-                    "
+                "
             );
 
             $statement->bind_param("ss", $username, $password);
@@ -225,7 +233,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                 "delete from project
                     where id = ?;
-                    "
+                "
             );
 
             $statement->bind_param("d", $projectid);
