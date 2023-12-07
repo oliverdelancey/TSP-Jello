@@ -79,145 +79,116 @@
         </form>
     
     <?php 
-    include "database.php";
-    include "db.php";
-    /*if(!isset($_SESSION)){
-        session_start();
-    }*/
-
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-
-    $conn = new mysqli($server, $username, $password, $database);
-    if ($conn->connect_error) {
-    	die("connection failed: " . $conn->connect_error);
-    }
-    
-    function getUserID($username){
-        global $conn;
-        try{
-            $statement = $conn->prepare(
-                "select id from users where username = ?"
-            );
+        include "database.php";
+        include "db.php";
         
-            $statement->bind_param("s", $_SESSION["uname"]);
+
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+
+        $conn = new mysqli($server, $username, $password, $database);
+        if ($conn->connect_error) {
+            die("connection failed: " . $conn->connect_error);
+        }
         
-            $statement->execute(); 
+        function getUserID($username){
+            global $conn;
+            try{
+                $statement = $conn->prepare(
+                    "select id from users where username = ?"
+                );
             
-            $result = $statement->get_result();
-            $row = $result->fetch_assoc();
+                $statement->bind_param("s", $_SESSION["uname"]);
+            
+                $statement->execute(); 
+                
+                $result = $statement->get_result();
+                $row = $result->fetch_assoc();
 
-            return $row["id"];
+                return $row["id"];
 
-        } catch(mysqli_sql_exception $e){
-            print "Error!" . $e->getMessage() . "<br/>";  
-        }
-
-    }
-
-    /*
-    function display_projects(){
-        try{
-            $statement = $conn->prepare("select name, description, start, end
-            FROM project 
-            INNER JOIN projectAssignments ON id = proj_id AND 1111 = user_id;
-            ");
-	        $statement->bind_param(":uid", $uid);
-	        $result = $statement->execute();
-    
-            while ($row = $statement->fetch()){
-                echo "<tr>";
-                $data = $row[0] . "\t";
-                echo "<td>";
-                print $data; 
-                echo "</td>";
-                $data = $row[1] . "\t";
-                echo "<td>";
-                print $data; 
-                echo "</td>";
-                $data = $row[2] . "\n";
-                echo "<td>";
-                print $data;
-                $data = $row[3] . "\n";
-                echo "<td>";
-                print $data; 
-                echo "</td>";
-                echo "</tr>";
+            } catch(mysqli_sql_exception $e){
+                print "Error!" . $e->getMessage() . "<br/>";  
             }
-            echo "</table>";
-            echo "test";
-        } catch(PDOException $e){
-            print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
         }
-    }*/
 
-        
+            
         if (!isset($_SESSION["uname"])) {
             header("LOCATION: login.php");
         }
-    
+        
         if ( isset($_POST["logout"]) ) {
             session_destroy();
             header("LOCATION: login.php");
         }
 
-        
+            
     ?>
         
     </div>
     
         
-    </head>
+</head>
 
-  <body>
+<body>
     
     <br>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
-        </tr>
 
-    <?php
-        #display_projects();
-        $uid = getUserID($_SESSION["uname"]);
-        //echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
-        //echo "<pre>"; print_r($uid[0]); echo "</pre>";
-        //$userid = $uid[0];
-        //echo "<pre>"; echo $uid . "</pre>";
+    <form method="post" action="userHome.php">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+            </tr>
 
-        $userProjects = get_projects($uid);
-        //echo "<pre>"; print_r($userProjects); echo "</pre>";
+        <?php
 
-        for($i = 0; $i < sizeof($userProjects); $i++){
-            echo "<tr>";
-            
-            echo "<td>";
-            print $userProjects[$i][0]; 
-            echo "</td>";
+            $uid = getUserID($_SESSION["uname"]);
+            $userProjects = get_projects($uid);
 
-            echo "<td>";
-            print $userProjects[$i][4]; 
-            echo "</td>";
-            
-            echo "<td>";
-            print $userProjects[$i][1];
-            echo "</td>";
+            for($i = 0; $i < sizeof($userProjects); $i++){
+                echo "<tr>";
+                
+                echo "<td>";
+                print $userProjects[$i][0]; 
+                echo "</td>";
 
-            echo "<td>";
-            print $userProjects[$i][2]; 
-            echo "</td>";
+                echo "<td>";
+                print $userProjects[$i][4]; 
+                echo "</td>";
+                
+                echo "<td>";
+                print $userProjects[$i][1];
+                echo "</td>";
 
-            echo "</tr>";
-        }
-        echo "</table>";
-    ?>  
-    </table>
+                echo "<td>";
+                print $userProjects[$i][2]; 
+                echo "</td>";
+
+                echo "<td>";
+                echo "<input type = 'hidden' name = projID value = " . $userProjects[$i][3] . ">";
+                echo "<input type = 'submit' value ='Delete Project' name ='delete'>";
+                echo "</td>";
+
+                echo "</tr>";
+            }
+            echo "</table>";
+        ?>  
+        </table>
+
+    </form>
     <!--TODO:
         Button that leads to project creation page
     -->
   </body>
+
+  <?php
+  
+    if ( isset($_POST["delete"]) ) {
+        echo "<pre>"; print($_POST["projID"]); echo "</pre>";
+    }
+  
+  ?>
 </html>
