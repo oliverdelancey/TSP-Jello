@@ -129,7 +129,7 @@ if ($conn->connect_error) {
     }
 
     //need to add code to add the user to their newly created project
-    function create_project($name, $end = null, $description){
+    function create_project($name, $end = null, $description, $userid){
         global $conn;
         try {
             //$id = rand(1, 100000);
@@ -154,8 +154,6 @@ if ($conn->connect_error) {
             print "Error! " . $e->getMessage() . "<br/>"; 
             die();
         }
-        
-        return null;
     }
 
     function create_column($name, $projectid){
@@ -177,7 +175,6 @@ if ($conn->connect_error) {
             print "Error! " . $e->getMessage() . "<br/r>";
             die();
         }
-        return null;
     }
 
     function create_task($columnid, $projectid, $priority = 3, $description){
@@ -200,8 +197,6 @@ if ($conn->connect_error) {
             print "Error! " . $e->getMessage() . "<br/r>";
             die();
         }
-
-        return null;
     }
 
     function create_user($username, $password){
@@ -272,7 +267,6 @@ if ($conn->connect_error) {
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
         }
-        return null;
     }
 
     function modify_task($id, $priority, $description, $status, $columnid){
@@ -297,14 +291,45 @@ if ($conn->connect_error) {
         }
     }
 
-    function modify_project($id, $name, $start, $end, $description){
+    function modify_project($name, $start, $end, $id, $description){
         global $conn;
-        return null;
+
+        try {
+            $statement = $conn->prepare(
+                "update project
+                    set name=?, start=?, end=?, decription=?
+                    where id=?
+                "
+            );
+
+            $statement->bind_param("siis", $name, $start, $end, $description);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result->fetch_all();
+
+        } catch (mysqli_sql_exception $e) {
+            print "Error!" . $e->getMessage() . "<br/>";
+            die();
+        }
     }
 
     function modify_column($id, $name){
         global $conn;
-        return null;
+
+        try {
+            $statement = $conn->prepare(
+                "update col
+                set name=?
+                "
+            );
+
+
+        } catch (mysqli_sql_exception $e) {
+            print "Error!" . $e->getMessage() . "<br/>";
+            die();
+        }
+
     }
 
     function modify_task_assignment($userid, $taskid){
