@@ -298,7 +298,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                 "update project
                     set name=?, start=?, end=?, decription=?
-                    where id=?
+                    where id=?;
                 "
             );
 
@@ -320,10 +320,16 @@ if ($conn->connect_error) {
         try {
             $statement = $conn->prepare(
                 "update col
-                set name=?
+                    set name=?
+                    where id=?;
                 "
             );
 
+            $statement->bind_param("si", $name, $id);
+            $statement->execute();
+            $result = $statement->get_result();
+
+            return $result->fetch_all();
 
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
