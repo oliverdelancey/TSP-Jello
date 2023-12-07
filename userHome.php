@@ -209,6 +209,8 @@
         echo "<pre style='color:white'>"; print($_POST["description"]); echo "</pre>";
         echo "<pre style='color:white'>"; print($start); echo "</pre>";
         echo "<pre style='color:white'>"; print($end); echo "</pre>";
+
+        create_project($_POST["title"], $_POST["description"], $start, $end, $uid);
     }
   
   ?>

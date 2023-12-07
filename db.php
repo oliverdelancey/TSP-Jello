@@ -128,7 +128,7 @@ if ($conn->connect_error) {
         }
     }
 
-    function create_project($name, $end = null, $description, $userid){
+    function create_project($name, $description, $start, $end,  $userid){
         global $conn;
         
         try {
@@ -145,11 +145,11 @@ if ($conn->connect_error) {
                 $statement1 = $conn->prepare(
                     "insert into 
                         project (name, start, end, id, description) 
-                        values (?, NOW(), NOW() + ?, ?, ?);
+                        values (?, ?, ?, ?, ?);
                     "
                 );
                 
-                $statement1->bind_param("siis", $name, $end, $projectid, $description);
+                $statement1->bind_param("siiis", $name, $start, $end, $projectid, $description);
                 $statement1->execute();
                 
                 //assign user to the project
