@@ -179,8 +179,9 @@
             <tr>
                 <td><input type="text" id="title" name="title" placeholder="Enter Project Title"
                             onClick="this.value='';"></td>
-                <td><textarea id="description" name="description" rows="1" cols="40"
-                maxlength="40" placeholder="Enter Project Description"></textarea></td>
+                <td><textarea style="max-width: 250px;"
+                id="description" name="description" rows="1" cols="40" 
+                placeholder="Enter Project Description"></textarea></td>
                 <td>
                     <label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate"></td>
