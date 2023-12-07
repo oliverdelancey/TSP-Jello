@@ -187,10 +187,10 @@
         //echo "<pre>"; print($_SESSION["uname"]); echo "</pre>";
         //echo "<pre>"; print_r($uid[0]); echo "</pre>";
         //$userid = $uid[0];
-        echo "<pre>"; echo $uid . "</pre>";
+        //echo "<pre>"; echo $uid . "</pre>";
 
         $userProjects = get_projects($uid);
-        echo "<pre>"; print_r($userProjects); echo "</pre>";
+        //echo "<pre>"; print_r($userProjects); echo "</pre>";
 
         for($i = 0; $i < sizeof($userProjects); $i++){
             echo "<tr>";
@@ -200,15 +200,15 @@
             echo "</td>";
 
             echo "<td>";
-            print $userProjects[$i][1]; 
+            print $userProjects[$i][4]; 
             echo "</td>";
             
             echo "<td>";
-            print $userProjects[$i][2];
+            print $userProjects[$i][1];
             echo "</td>";
 
             echo "<td>";
-            print $userProjects[$i][3]; 
+            print $userProjects[$i][2]; 
             echo "</td>";
 
             echo "</tr>";
