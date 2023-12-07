@@ -167,16 +167,27 @@
                 print $userProjects[$i][2]; 
                 echo "</td>";
 
-                echo "<td>";
-                //echo "<input type = 'hidden' name = projID value = " . $userProjects[$i][3] . ">";
-                //echo "<input type = 'submit' value ='Delete Project' name ='delete'>";
-                echo "<input type='button' onclick='alert('Project ID: " . $userProjects[$i][3] . "')' value='Delete Project'>";
-                echo "</td>";
-
                 echo "</tr>";
             }
             echo "</table>";
         ?>  
+
+        </table>
+        <br>
+        
+        <table>
+            <tr>
+                <td><input type="text" id="title" name="title" placeholder="Enter Project Title"
+                            onClick="this.value='';"></td>
+                <td><textarea id="description" name="description" rows="4" cols="50" placeholder="Enter Project Description"></textarea></td>
+                <td>
+                    <label for="startDate">Start Date:</label>
+                    <input type="datetime-local" id="startDate" name="startDate"></td>
+                <td>
+                    <label for="endDate">End Date:</label>
+                    <input type="datetime-local" id="endDate" name="endDate"></td>
+                <td><input type="submit" value="Create Project" name="create"> </td>
+            </tr>
         </table>
 
     </form>
@@ -187,10 +198,12 @@
 
   <?php
   
-    /*if ( isset($_POST["delete"]) ) {
-        echo "<pre>" . $_POST["projID"] . "</pre>";
-        echo '<p style="color:red">test</p>';
-    }*/
+    if ( isset($_POST["create"]) ) {
+        echo "<pre>"; print($_POST["title"]); echo "</pre>";
+        echo "<pre>"; print($_POST["description"]); echo "</pre>";
+        echo "<pre>"; print($_POST["startDate"]); echo "</pre>";
+        echo "<pre>"; print($_POST["endDate"]); echo "</pre>";
+    }
   
   ?>
 </html>
