@@ -239,13 +239,11 @@ if ($conn->connect_error) {
             $statement->bind_param("i", $projectid);
 
             $statement->execute();
-            $result = $statement->get_result();
 
-           return $result->fetch_all();
-
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            
+            return 1;
         }
     }
     
@@ -272,9 +270,7 @@ if ($conn->connect_error) {
                 $statement->execute();
                 $statement2->execute();
 
-                //$result = $statement2->get_result();
             $conn->commit();
-            //return $result->fetch_all();
             return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
@@ -295,9 +291,8 @@ if ($conn->connect_error) {
             $statement->bind_param("i", $projectid);
 
             $statement->execute();
-            //$result = $statement->get_result();
+          
 
-            //return $result->fetch_all();
             return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
@@ -318,9 +313,8 @@ if ($conn->connect_error) {
             $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
 
             $statement->execute();
-            //$result = $statement->get_result();
 
-            //return $result->fetch_all();
+
             return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
@@ -341,13 +335,15 @@ if ($conn->connect_error) {
 
             $statement->bind_param("siis", $name, $start, $end, $description);
             $statement->execute();
-            //$result = $statement->get_result();
+
+
+            return 0;
 
             //return $result->fetch_all();
             return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
-            return 1;    
+            return 1;
         }
     }
 
@@ -364,7 +360,6 @@ if ($conn->connect_error) {
 
             $statement->bind_param("si", $name, $id);
             $statement->execute();
-            //$result = $statement->get_result();
 
             //return $result->fetch_all();
             return 0;
@@ -386,8 +381,8 @@ if ($conn->connect_error) {
                 );
                 $statement1->bind_param("i", $taskid);
                 $statement1->execute();
-                $result1 = $statement1->get_result();
-                $result1Row = $result1->fetch_row();
+                
+                
 
                 if($result1Row == null){ //entry doesn't exist 
                     $statement2 = $conn->prepare(
@@ -397,7 +392,7 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("ii", $userid, $taskid);
                     $statement2->execute();
-                    $result2 = $statement2->get_result();
+                    
                 } else if($result1Row[0] == $userid){ //entry has userid as the assignment
                     $statement2 = $conn->prepare(
                         "update taskAssignment
@@ -407,7 +402,7 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("i", $taskid);
                     $statement2->execute();
-                    $result2 = $statement2->get_result();    
+                      
                 } else{ //entry has some other user or null as assignment 
                     $statement2 = $conn->prepare(
                         "update taskAssignment
@@ -417,17 +412,15 @@ if ($conn->connect_error) {
                     );
                     $statement2->bind_param("ii", $userid, $taskid);
                     $statement2->execute();
-                    $result2 = $statement2->get_result();
+                    
                 }
 
             $conn->commit();
 
-            //return ($result2->fetch_row())[0];
             return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             $conn->rollback();
-            //return $e->getCode();
             return 1;
         }
     }
@@ -446,10 +439,10 @@ if ($conn->connect_error) {
             $statement->execute(); 
             $result = $statement->get_result();
 
-            return $statement->get_result()->fetch_all();
-            
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
+            return 1;
         }
     }
     
@@ -467,12 +460,10 @@ if ($conn->connect_error) {
             $statement->execute();
             //$result = $statement->get_result();
 
-            //return $result->fetch_all();
             return 0;
         } catch(mysqli_sql_exception $e){
-            print "Error!" . $e->getMessage() . "<br/>";
+            print "Error!" . $e->getMessage() . "<br/>"; 
             return 1;
-              
         }
     }
 
