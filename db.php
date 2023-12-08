@@ -337,13 +337,9 @@ if ($conn->connect_error) {
                 "
             );
 
-            $statement->bind_param("siis", $name, $start, $end, $description);
+            $statement->bind_param("siisi", $name, $start, $end, $description, $id);
             $statement->execute();
-
-
-            return 0;
-
-            //return $result->fetch_all();
+            
             return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";

@@ -87,7 +87,7 @@ try {
 
     // modify_project
     heading("function modify_project");
-    $result = modify_project("test", 5, 5, $projectid, "why");
+    $result = modify_project("test", date("Y-m-d H:i:s"), date("Y-m-d H:i:s") + 3, $projectid, "why");
     print_array($result);
 
     // modify_column
