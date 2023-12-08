@@ -87,7 +87,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                "select id, priority, description, status, username, user_id
                     from task
-                    inner join (select username, task_id, user_id
+                    left join (select username, task_id, user_id
                         from users inner join taskAssignments on id = user_id) as a
                         on id = task_id
                     where col_id = ?;
