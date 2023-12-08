@@ -311,7 +311,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("iissii", $columnid, $priority, $description, $status, $id);
+            $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
 
             $statement->execute();
 
