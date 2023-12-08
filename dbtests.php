@@ -82,7 +82,7 @@ try {
 
     // modify_task
     heading("function modify_task");
-    $result = modify_task($taskid, 2, "why", "status", $columnid);
+    $result = modify_task($taskid, 2, "why", 1, $columnid);
     print_array($result);
 
     // modify_project
