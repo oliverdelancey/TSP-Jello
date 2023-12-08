@@ -84,9 +84,64 @@
         td a:hover:not(.active) {
             color: #ccc;
         }
+
+        ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                top:0px;
+                left:0px;
+                overflow: hidden;
+                position: fixed;
+                width:100%;
+                background-image: linear-gradient(180deg, #080811 0%, #202022 100%);
+        }
+
+        li {
+            font-family: 'Trebuchet MS';
+            font-size:25px;
+            font-weight:600;
+            color: #ffffff;
+            float:left;
+        }
+
+        li h1 {
+            padding: 0px 15px;
+        }
+        
+        li a {
+            font-weight:400;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        li input[type=submit] {
+            background: none;
+            font-family: 'Trebuchet MS';
+            font-size:25px;
+            font-weight:600;
+            color: #ffffff;
+            float:left;
+        }
+
+        li input[type=submit]:hover:not(.active) {
+            color: #ccc;
+        }
         
     </style>
 
+
+    <ul>
+            <li style="font-size:30px; font-weight:600"><h1>Jello</h1></li>
+
+            <li style="float:right">
+                <form method="post" action="userHome.php">
+                    <input type="submit" value="Log Out" name="logout">
+                </form>
+            </li>
+            
+    </ul>
+    
     <div style="clear: both" class = "top">
     
         <h1 style="float: left">
