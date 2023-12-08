@@ -10,7 +10,7 @@
         <li class="h1" style="font-size:30px; font-weight:600">Jello</li>
 
         <li style="float:right"><a href="http://syenite.net/login.php">Sign In</a></li>
-        <li class="active" style="float:right"><a href="http://syenite.net/register.html">Register</a></li>
+        <li class="active" style="float:right"><a href="http://syenite.net/register.php">Register</a></li>
 
     </ul>
 
@@ -19,6 +19,14 @@
 
             <h1>Create User</h1>
             <form method="post" action="userauth.php">
+
+                <?php
+                        if(isset($_GET['error']) && $_GET['error']=="1") {
+                            echo('<p style="color:red">Username already exists!</p>');
+                        } else {
+                            unset($_GET['error']);
+                        }
+                ?>
     
                 <label for="uname">Username:</label><br>
                 <p><input type="text" id="uname" name="uname" placeholder="Type your username"
