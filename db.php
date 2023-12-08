@@ -179,7 +179,7 @@ if ($conn->connect_error) {
             $statement->bind_param("is", $projectid, $name);
             $statement->execute();
             
-            return "Column created successfully!";
+            return $statement->get_result()->fetch_all();
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
@@ -201,7 +201,7 @@ if ($conn->connect_error) {
             $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
             $statement->execute();
 
-            return "Task created successfully!";
+            return $statement->get_result()->fetch_all();
 
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
@@ -442,7 +442,7 @@ if ($conn->connect_error) {
             $statement->execute(); 
             //$result = $statement->get_result();
 
-            return "Project successfully assigned!";
+            return $statement->get_result()->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
         }

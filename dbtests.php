@@ -37,6 +37,10 @@ try {
     heading("function create_user");
     $status = create_user("sam", "smith");
     print_array($status);
+
+    heading("function authenticate_user");
+    $status = authenticate_user("sam", "smith");
+    print_array($status);
     $userid = $status[0][0];
 
     // create_project
@@ -95,7 +99,7 @@ try {
     print_array($result);
 
 
-    
+
     // create_project_assignment
     heading("function create_project_assignment");
     $result = create_project_assignment(0, 0);
