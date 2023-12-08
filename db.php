@@ -54,7 +54,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -77,7 +77,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -103,7 +103,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -125,7 +125,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -183,7 +183,7 @@ if ($conn->connect_error) {
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
-            die();
+             
         }
     }
 
@@ -205,7 +205,7 @@ if ($conn->connect_error) {
 
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
-            die();
+             
         }
     }
 
@@ -244,7 +244,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
     
@@ -277,7 +277,7 @@ if ($conn->connect_error) {
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             $conn->rollback();
-            die();
+             
         }
     }
     
@@ -298,7 +298,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -320,7 +320,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
@@ -343,7 +343,7 @@ if ($conn->connect_error) {
 
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
-            die();
+             
         }
     }
 
@@ -366,7 +366,7 @@ if ($conn->connect_error) {
 
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
-            die();
+             
         }
 
     }
@@ -463,7 +463,7 @@ if ($conn->connect_error) {
             return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-            die(); 
+              
         }
     }
 
