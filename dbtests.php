@@ -44,26 +44,7 @@ try {
 
     /* TESTS */
 
-    // get_projects
-    $projects = get_projects($userid);
-    heading("function get_projects");
-    print_array($projects);
 
-    // get_columns
-    $project_id = $projects[0][3];
-    $columns = get_columns($project_id);
-    heading("function get_columns");
-    print_array($columns);
-
-    // get_tasks
-    $tasks = get_tasks(0);
-    heading("function get_tasks");
-    print_array($tasks);
-
-    // get_collaborators
-    $collaborators = get_collaborators(0);
-    heading("function get_collaborators");
-    print_array($collaborators);
 
     // create_project
     $status = create_project("test", "test", 0, 0, 0);
@@ -109,6 +90,28 @@ try {
     $result = create_project_assignment(0, 0);
     heading("function create_project_assignment");
     print_array($result);
+
+
+    // get_projects
+    $projects = get_projects($userid);
+    heading("function get_projects");
+    print_array($projects);
+
+    // get_columns
+    $project_id = $projects[0][3];
+    $columns = get_columns($project_id);
+    heading("function get_columns");
+    print_array($columns);
+
+    // get_tasks
+    $tasks = get_tasks(0);
+    heading("function get_tasks");
+    print_array($tasks);
+
+    // get_collaborators
+    $collaborators = get_collaborators(0);
+    heading("function get_collaborators");
+    print_array($collaborators);
 
     // delete_project_assignment
     $result = delete_project_assignment(0, 0);
