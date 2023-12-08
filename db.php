@@ -241,10 +241,11 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->fetch_all();
+           return $result->fetch_all();
+
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-              
+            
         }
     }
     
@@ -271,13 +272,14 @@ if ($conn->connect_error) {
                 $statement->execute();
                 $statement2->execute();
 
-                $result = $statement2->get_result();
+                //$result = $statement2->get_result();
             $conn->commit();
-            return $result->fetch_all();
+            //return $result->fetch_all();
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             $conn->rollback();
-             
+            return 1;
         }
     }
     
@@ -293,12 +295,13 @@ if ($conn->connect_error) {
             $statement->bind_param("i", $projectid);
 
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
+            //return $result->fetch_all();
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-              
+            return 1;
         }
     }
 
@@ -315,12 +318,13 @@ if ($conn->connect_error) {
             $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
 
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
+            //return $result->fetch_all();
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
-              
+            return 1;
         }
     }
 
@@ -337,13 +341,13 @@ if ($conn->connect_error) {
 
             $statement->bind_param("siis", $name, $start, $end, $description);
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
-
+            //return $result->fetch_all();
+            return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
-             
+            return 1;    
         }
     }
 
@@ -360,13 +364,13 @@ if ($conn->connect_error) {
 
             $statement->bind_param("si", $name, $id);
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
-
+            //return $result->fetch_all();
+            return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
-             
+            return 1;
         }
 
     }
@@ -418,11 +422,13 @@ if ($conn->connect_error) {
 
             $conn->commit();
 
-            return ($result2->fetch_row())[0];
+            //return ($result2->fetch_row())[0];
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             $conn->rollback();
-            return $e->getCode();
+            //return $e->getCode();
+            return 1;
         }
     }
 
@@ -438,9 +444,10 @@ if ($conn->connect_error) {
             $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute(); 
-            //$result = $statement->get_result();
+            $result = $statement->get_result();
 
             return $statement->get_result()->fetch_all();
+            
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
         }
@@ -458,11 +465,13 @@ if ($conn->connect_error) {
             $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
+            //return $result->fetch_all();
+            return 0;
         } catch(mysqli_sql_exception $e){
-            print "Error!" . $e->getMessage() . "<br/>"; 
+            print "Error!" . $e->getMessage() . "<br/>";
+            return 1;
               
         }
     }
