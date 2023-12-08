@@ -183,7 +183,7 @@ if ($conn->connect_error) {
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
-             
+            return 1;
         }
     }
 
@@ -201,11 +201,11 @@ if ($conn->connect_error) {
             $statement->bind_param("iiis", $columnid, $projectid, $priority, $description);
             $statement->execute();
 
-            return $statement->get_result()->fetch_all();
+            return 0;
 
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
-             
+            return 1;
         }
     }
 
@@ -221,9 +221,10 @@ if ($conn->connect_error) {
             $statement->execute();
             $result = $statement->get_result();
 
-            return $result->fetch_all();
+            return 0;
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>";  
+            return 1;
         }
     }
     
