@@ -19,7 +19,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                 "select id
                     from users
-                    where name = ? and password = sha2(?, 256);
+                    where username = ? and password = sha2(?, 256);
                     "
             );
 
