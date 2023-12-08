@@ -301,17 +301,17 @@ if ($conn->connect_error) {
         }
     }
 
-    function modify_task($id, $priority, $description, $status, $columnid, $projectid){
+    function modify_task($id, $priority, $description, $status, $columnid){
         global $conn;
         try{
             $statement = $conn->prepare(
                 "update task
-                    set col_id = ?, priority = ?, description = ? status = ? proj_id = ?
+                    set col_id = ?, priority = ?, description = ? status = ?
                     where id = ?;
                     "
             );
 
-            $statement->bind_param("iissii", $columnid, $priority, $description, $status, $id, $projectid);
+            $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
 
             $statement->execute();
 
