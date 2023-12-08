@@ -66,11 +66,11 @@
         }
 
         td > a:first-child {
-        display: flex;
-        padding: 18px;
-        text-decoration: none;
-        color: inherit;
-        z-index: 0;
+            display: flex;
+            padding: 18px;
+            text-decoration: none;
+            color: inherit;
+            z-index: 0;
 
             &:focus {
                 outline: 0;
@@ -173,25 +173,25 @@
                 echo "<tr>";
                 $proj_id = $userProjects[$i][3];
                 echo "<td>";
-                echo "<a href='userHome.php?id=$proj_id' class='row-link'>";
                 print $userProjects[$i][0]; 
-                echo "</a></td>";
+                echo "</td>";
 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][4]; 
-                echo "</a></td>";
+                echo "</td>";
                 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][1];
-                echo "</a></td>";
+                echo "</td>";
 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][2]; 
-                echo "</a></td>";
-                
+                echo "</td>";
+
+                echo "<td>";
+                echo "<a href='userHome.php?id=$proj_id' class='row-link'>";
+                echo "Go to Project"; 
+                echo "</td>";
 
                 echo "</tr>";
             }
