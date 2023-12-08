@@ -150,6 +150,7 @@ try {
     // }
     // $conn->autocommit(true);
     print "Finally exited lesgoo <br/>";
+    echo "testing echo in finally block <br/>";
     $conn->rollback();
     die(); 
 }
