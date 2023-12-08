@@ -306,7 +306,7 @@ if ($conn->connect_error) {
         try{
             $statement = $conn->prepare(
                 "update task
-                    set col_id = ?, priority = ?, description = ? status = ?
+                    set col_id = ?, priority = ?, description = ?, status = ?
                     where id = ?;
                     "
             );
