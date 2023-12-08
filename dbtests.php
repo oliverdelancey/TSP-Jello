@@ -149,6 +149,7 @@ try {
     //     $conn->rollback();  // undo changes
     // }
     // $conn->autocommit(true);
+    print "Finally exited lesgoo <br/>";
     $conn->rollback();
     die(); 
 }
