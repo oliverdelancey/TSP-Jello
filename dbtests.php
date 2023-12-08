@@ -35,7 +35,7 @@ try {
 
 
     // create_project
-    $status = create_project("test", "test", 0, 0, 0);
+    $status = create_project("test", "test", 0, 1, 0);
     heading("function create_project");
     print_array($status);
 
