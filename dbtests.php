@@ -22,8 +22,7 @@ function heading($text) {
 
 function print_array($array) {
     echo "<pre>"; 
-    //print_r($array); 
-    echo "test";
+    print_r($array); 
     echo "</pre>";
     echo "<br/>";
 }
@@ -38,9 +37,7 @@ try {
 
     // create_user
     heading("function create_user");
-    echo "stuff </br>";
     $status = create_user("sam", "smith");
-    echo "morestuff </br>";
     print_array($status);
 
     heading("function authenticate_user");
