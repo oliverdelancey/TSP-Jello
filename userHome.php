@@ -150,26 +150,26 @@
 
             for($i = 0; $i < sizeof($userProjects); $i++){
                 echo "<tr>";
-                
+                $proj_id = $userProjects[$i][3];
                 echo "<td>";
-                echo "<a href='userHome.php?id=$userProjects[$i][3]' class='row-link'>";
+                echo "<a href='userHome.php?id=$proj_id' class='row-link'>";
                 print $userProjects[$i][0]; 
-                echo "</a></td>";
+                echo "</td>";
 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$userProjects[$i][3] tabindex='-1' class='row-link'>";
+                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][4]; 
-                echo "</a></td>";
+                echo "</td>";
                 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$userProjects[$i][3] tabindex='-1' class='row-link'>";
+                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][1];
-                echo "</a></td>";
+                echo "</td>";
 
                 echo "<td>";
-                echo "<a href='userHome.php?id=$userProjects[$i][3] tabindex='-1' class='row-link'>";
+                echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][2]; 
-                echo "</a></td>";
+                echo "</td>";
 
                 echo "</tr>";
             }
@@ -203,7 +203,9 @@
 </body>
 
   <?php
-    echo "<pre style='color:white'>"; print($_GET["id"]); echo "</pre>";
+    if(isset($_GET["id"])){
+        echo "<pre style='color:white'>"; print($_GET["id"]); echo "</pre>";
+    }
     if ( isset($_POST["create"]) ) {
 
         $start = date("Y-m-d H:i:s", strtotime($_POST["startDate"]));
