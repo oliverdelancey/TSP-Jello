@@ -111,7 +111,7 @@ if ($conn->connect_error) {
         global $conn;
         try{
             $statement = $conn->prepare(
-                "select name, id 
+                "select username, id 
                     from users
                     inner join projectAssignments on ? = proj_id and id = user_id;
                     "
