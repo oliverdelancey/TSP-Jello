@@ -79,7 +79,6 @@ if ($valid_input) {
 
 $conn->close();
 
-header("LOCATION: register.html");
 ?>
 </body>
 </html>
