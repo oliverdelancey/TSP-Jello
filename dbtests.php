@@ -30,18 +30,6 @@ try {
     // $conn->autocommit(false);
     // $committed = false;
 
-    $statement = $conn->prepare(
-        "select id from users where username = ?"
-    );
-
-    $statement->bind_param("d", $_SESSION["uname"]);
-
-    $statement->execute(); 
-    $statement->bind_result($userid);
-    $statement->fetch();
-    echo "Got userid: " . $userid . "<br/>";
-    $statement->close();
-
     /* TESTS */
 
 
