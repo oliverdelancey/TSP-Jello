@@ -80,6 +80,10 @@
         a {
         color: #5165ff;
         }
+
+        td a:hover:not(.active) {
+            color: #ccc;
+        }
         
     </style>
 
@@ -220,9 +224,9 @@
 </body>
 
   <?php
-    if(isset($_GET["id"])){
+    /*if(isset($_GET["id"])){
         echo "<pre style='color:white'>"; print($_GET["id"]); echo "</pre>";
-    }
+    }*/
     if ( isset($_POST["create"]) ) {
 
         $start = date("Y-m-d H:i:s", strtotime($_POST["startDate"]));
