@@ -71,7 +71,9 @@ if ($valid_input) {
 				header("LOCATION: login.php");
 			        return $result;
 		        } catch(mysqli_sql_exception $e){
-		            print "Error! " . $e->getMessage() . "<br/>";  
+
+				header("LOCATION: register.php?error=1");
+		            	print "Error! " . $e->getMessage() . "<br/>";  
 		        }
 		}
 	}
