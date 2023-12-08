@@ -64,6 +64,22 @@
             border-style: hidden;
             
         }
+
+        td > a:first-child {
+        display: flex;
+        padding: 18px;
+        text-decoration: none;
+        color: inherit;
+        z-index: 0;
+
+            &:focus {
+                outline: 0;
+            }
+        }
+
+        a {
+        color: #5165ff;
+        }
         
     </style>
 
