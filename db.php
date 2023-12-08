@@ -413,9 +413,9 @@ if ($conn->connect_error) {
             $statement->bind_param("dd", $userid, $projectid);
 
             $statement->execute(); 
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
-            return $result->fetch_all();
+            return "Project successfully assigned!";
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
         }
