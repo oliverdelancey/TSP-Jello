@@ -33,92 +33,101 @@ try {
     /* TESTS */
 
 
+    // create_user
+    heading("function create_user");
+    $status = create_user("sam", "smith");
+    print_array($status);
+    $userid = $status[0][0];
 
     // create_project
-    $status = create_project("test", "test", 0, 1, 0);
     heading("function create_project");
+    $status = create_project("test", "test", date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $userid);
     print_array($status);
 
-    // create_column
-    $status = create_column("test_col", 0);
+    // get_projects
+    heading("function get_projects");
+    $projects = get_projects($userid);
+    print_array($projects);
+    $projectid = $projects[0][3];
+
+    // create_column.
     heading("function create_column");
+    $status = create_column("test_col", $projectid);
     print_array($status);
+
+    // get_columns
+    heading("function get_columns");
+    $columns = get_columns($projectid);
+    print_array($columns);
+    $columnid = $columns[0][0];
 
     // create_task
-    $status = create_task(0, 0, 3, "test task");
     heading("function create_task");
-    print_array($status);
-    
-    // create_user
-    $status = create_user("sam", "smith");
-    heading("function create_user");
+    $status = create_task($columnid, 0, 3, "test task");
     print_array($status);
 
+    // get_tasks
+    heading("function get_tasks");
+    $tasks = get_tasks($columnid);
+    print_array($tasks);
+    $taskid = $tasks[0][0];
+
+
+
     // modify_task
-    $result = modify_task(0, 2, "why", "status", 0);
     heading("function modify_task");
+    $result = modify_task(0, 2, "why", "status", 0);
     print_array($result);
 
     // modify_project
-    $result = modify_project("test", 5, 5, 0, "why");
     heading("function modify_project");
+    $result = modify_project("test", 5, 5, 0, "why");
     print_array($result);
 
     // modify_column
-    $result = modify_column(0, "testing");
     heading("function modify_column");
+    $result = modify_column(0, "testing");
     print_array($result);
 
     // modify_task_assignment
-    $result = modify_task_assignment(0, 0);
     heading("function modify_task_assignment");
+    $result = modify_task_assignment(0, 0);
     print_array($result);
 
+
+    
     // create_project_assignment
-    $result = create_project_assignment(0, 0);
     heading("function create_project_assignment");
+    $result = create_project_assignment(0, 0);
     print_array($result);
 
 
-    // get_projects
-    $projects = get_projects($userid);
-    heading("function get_projects");
-    print_array($projects);
-
-    // get_columns
-    $project_id = $projects[0][3];
-    $columns = get_columns($project_id);
-    heading("function get_columns");
-    print_array($columns);
-
-    // get_tasks
-    $tasks = get_tasks(0);
-    heading("function get_tasks");
-    print_array($tasks);
 
     // get_collaborators
-    $collaborators = get_collaborators(0);
     heading("function get_collaborators");
+    $collaborators = get_collaborators(0);
     print_array($collaborators);
 
+
+
     // delete_project_assignment
-    $result = delete_project_assignment(0, 0);
     heading("function delete_project_assignment");
+    $result = delete_project_assignment(0, 0);
     print_array($result);
 
     // delete_project
-    $result = delete_project(0);
     heading("function delete_project");
+    $result = delete_project(0);
     print_array($result);
 
     // delete_column
-    $result = delete_column(0, 0);
     heading("function delete_column");
+    $result = delete_column(0, 0);
     print_array($result);
 
     // delete_task
-    $result = delete_task(0);
     heading("function delete_task");
+    $result = delete_task(0);
     print_array($result);
 
 
