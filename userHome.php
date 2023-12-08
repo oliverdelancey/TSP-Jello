@@ -41,7 +41,8 @@
             
         }
 
-        tr {
+        tr:hover,
+        tr:focus-within {
             background: white;
             border-bottom: 1px solid #ddd;
         }
