@@ -213,9 +213,7 @@ if ($conn->connect_error) {
         global $conn;
         try{
             $statement = $conn->prepare(
-                "insert into users (username, id, password)
-                    values (?, RAND() * (100000 - 1) + 1, sha2(?, 256));
-                "
+                "insert into users (username, id, password) values (?, RAND() * (100000 -1) + 1, sha2(?, 256));"
             );
 
             $statement->bind_param("ss", $username, $password);
