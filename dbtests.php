@@ -130,6 +130,13 @@ try {
 
     // delete_column
     heading("function delete_column");
+    $columns = get_columns($projectid);
+    $defaultid = 0;
+    foreach ($columns as $col) {
+        if ($col[1] == "default") {
+            $defaultid = $col[0];
+        }
+    }
     $result = delete_column($columnid, $defaultid);
     print_array($result);
 
