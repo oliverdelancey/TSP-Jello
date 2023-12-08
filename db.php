@@ -63,7 +63,7 @@ if ($conn->connect_error) {
         try{
             $statement = $conn->prepare(
                 "select id, name 
-                    from column 
+                    from col 
                     where proj_id = ?;
                     "
             );
