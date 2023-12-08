@@ -10,7 +10,7 @@
             <li class="h1" style="font-size:30px; font-weight:600">Jello</li>
 
             <li class="active" style="float:right"><a href="http://syenite.net/login.php">Sign In</a></li>
-            <li style="float:right"><a href="http://syenite.net/register.html">Register</a></li>
+            <li style="float:right"><a href="http://syenite.net/register.php">Register</a></li>
             
         </ul>
 
@@ -38,7 +38,7 @@
                     
                     <input type="submit" name="submit" id="submit" value="Log in"><br>
                 </form>
-                <label for="register" id="register"><p style="color:#202022"">Don't have an account? <a href="http://syenite.net/register.html">Register</a></p></label>
+                <label for="register" id="register"><p style="color:#202022"">Don't have an account? <a href="http://syenite.net/register.php">Register</a></p></label>
             </div>
         </div>
 

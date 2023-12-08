@@ -80,58 +80,60 @@ try {
 
     // modify_task
     heading("function modify_task");
-    $result = modify_task(0, 2, "why", "status", 0);
+    $result = modify_task($taskid, 2, "why", "status", $columnid);
     print_array($result);
 
     // modify_project
     heading("function modify_project");
-    $result = modify_project("test", 5, 5, 0, "why");
+    $result = modify_project("test", 5, 5, $projectid, "why");
     print_array($result);
 
     // modify_column
     heading("function modify_column");
-    $result = modify_column(0, "testing");
+    $result = modify_column($columnid, "testing");
     print_array($result);
 
     // modify_task_assignment
     heading("function modify_task_assignment");
-    $result = modify_task_assignment(0, 0);
+    $result = modify_task_assignment($userid, $taskid);
     print_array($result);
 
 
 
     // create_project_assignment
     heading("function create_project_assignment");
-    $result = create_project_assignment(0, 0);
+    $status = create_user("ray", "cob");
+    $userid2 = $status[0][0];
+    $result = create_project_assignment($userid2, $projectid);
     print_array($result);
 
 
 
     // get_collaborators
     heading("function get_collaborators");
-    $collaborators = get_collaborators(0);
+    $collaborators = get_collaborators($projectid);
     print_array($collaborators);
 
 
 
     // delete_project_assignment
     heading("function delete_project_assignment");
-    $result = delete_project_assignment(0, 0);
-    print_array($result);
-
-    // delete_project
-    heading("function delete_project");
-    $result = delete_project(0);
-    print_array($result);
-
-    // delete_column
-    heading("function delete_column");
-    $result = delete_column(0, 0);
+    $result = delete_project_assignment($userid2, $projectid);
     print_array($result);
 
     // delete_task
     heading("function delete_task");
-    $result = delete_task(0);
+    $result = delete_task($taskid);
+    print_array($result);
+
+    // delete_column
+    heading("function delete_column");
+    $result = delete_column($columnid, $defaultid);
+    print_array($result);
+
+    // delete_project
+    heading("function delete_project");
+    $result = delete_project($projectid);
     print_array($result);
 
 
