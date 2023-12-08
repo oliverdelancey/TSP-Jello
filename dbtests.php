@@ -38,9 +38,9 @@ try {
 
     // create_user
     heading("function create_user");
-    echo "stuff</br>";
+    echo "stuff </br>";
     $status = create_user("sam", "smith");
-    echo "morestuff</br>"
+    echo "morestuff </br>";
     print_array($status);
 
     heading("function authenticate_user");
