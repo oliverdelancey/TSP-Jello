@@ -158,7 +158,7 @@ if ($conn->connect_error) {
                 create_column("default", $projectid);
 
             $conn->commit();
-            return $statement1->get_result()->fetch_all();
+            return 0;
 
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>"; 
@@ -179,7 +179,7 @@ if ($conn->connect_error) {
             $statement->bind_param("is", $projectid, $name);
             $statement->execute();
             
-            return $statement->get_result()->fetch_all();
+            return 0;
             
         } catch (mysqli_sql_exception $e) {
             print "Error! " . $e->getMessage() . "<br/r>";
