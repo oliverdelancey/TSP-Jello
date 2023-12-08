@@ -29,7 +29,7 @@ function print_array($array) {
 }
 
 try {
-    $conn->begin_transaction();
+    //$conn->begin_transaction();
     // $conn->autocommit(false);
     // $committed = false;
 
@@ -156,7 +156,7 @@ try {
     // $conn->autocommit(true);
     print "Finally exited lesgoo <br/>";
     echo "testing echo in finally block <br/>";
-    $conn->rollback();
+    //$conn->rollback();
     die(); 
 }
 
