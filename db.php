@@ -261,7 +261,7 @@ if ($conn->connect_error) {
                         where col_id = ?;"
                 );
                 $statement2 = $conn->prepare(
-                    "delete from column
+                    "delete from col
                         where id = ?;"
                 );
 
@@ -301,17 +301,17 @@ if ($conn->connect_error) {
         }
     }
 
-    function modify_task($id, $priority, $description, $status, $columnid){
+    function modify_task($id, $priority, $description, $status, $columnid, $projectid){
         global $conn;
         try{
             $statement = $conn->prepare(
                 "update task
-                    set col_id = ?, priority = ?, description = ? status = ?
+                    set col_id = ?, priority = ?, description = ? status = ? proj_id = ?
                     where id = ?;
                     "
             );
 
-            $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
+            $statement->bind_param("iissii", $columnid, $priority, $description, $status, $id, $projectid);
 
             $statement->execute();
 
@@ -329,7 +329,7 @@ if ($conn->connect_error) {
         try {
             $statement = $conn->prepare(
                 "update project
-                    set name=?, start=?, end=?, decription=?
+                    set name=?, start=?, end=?, description=?
                     where id=?;
                 "
             );
@@ -452,7 +452,7 @@ if ($conn->connect_error) {
         global $conn;
         try{
             $statement = $conn->prepare(
-                "remove from task
+                "remove from projectAssignments
                     where user_id = ? and proj_id = ?;
                     "
             );
