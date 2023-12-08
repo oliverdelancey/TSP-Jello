@@ -21,7 +21,10 @@ function heading($text) {
 }
 
 function print_array($array) {
-    echo "<pre>"; print_r($array); echo "</pre>";
+    echo "<pre>"; 
+    //print_r($array); 
+    echo "test";
+    echo "</pre>";
     echo "<br/>";
 }
 
