@@ -202,16 +202,16 @@
   
     if ( isset($_POST["create"]) ) {
 
-       /* $start = date("Y-m-d H:i:s", strtotime($_POST["startDate"]));
+        $start = date("Y-m-d H:i:s", strtotime($_POST["startDate"]));
         $end = date("Y-m-d H:i:s", strtotime($_POST["endDate"]));
 
-        echo "<pre style='color:white'>"; print($_POST["title"]); echo "</pre>";
+        /*echo "<pre style='color:white'>"; print($_POST["title"]); echo "</pre>";
         echo "<pre style='color:white'>"; print($_POST["description"]); echo "</pre>";
         echo "<pre style='color:white'>"; print($start); echo "</pre>";
         echo "<pre style='color:white'>"; print($end); echo "</pre>";*/
 
         create_project($_POST["title"], $_POST["description"], $start, $end, $uid);
-        header("userHome.php");
+        header("Refresh:0");
     }
   
   ?>
