@@ -383,7 +383,8 @@ if ($conn->connect_error) {
                 $statement1->bind_param("i", $taskid);
                 $statement1->execute();
                 
-                
+                $result1 = $statement1->get_result();
+                $result1Row = $result1->fetch_row();
 
                 if($result1Row == null){ //entry doesn't exist 
                     $statement2 = $conn->prepare(
