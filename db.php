@@ -253,7 +253,32 @@ if ($conn->connect_error) {
     //ids to the default before deleting column
     function delete_column($columnid, $defaultid){
         global $conn;
-        return null;
+        try{
+            $conn->begin_transaction();
+                $statement = $conn->prepare(
+                    "update task
+                        set col_id = ?
+                        where col_id = ?;"
+                );
+                $statement2 = $conn->prepare(
+                    "delete from column
+                        where id = ?;"
+                );
+
+                $statement->bind_param("dd", $defaultid, $columnid);
+                $statement2->bind_param("d", $columnid);
+
+                $statement->execute();
+                $statement2->execute();
+
+                $result = $statement2->get_result();
+            $conn->commit();
+            return $result->fetch_all();
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>"; 
+            $conn->rollback();
+            die();
+        }
     }
     
     function delete_task($taskid){
