@@ -69,7 +69,7 @@ try {
 
     // create_task
     heading("function create_task");
-    $status = create_task($columnid, 0, 3, "test task", $projectid);
+    $status = create_task($columnid, $projectid, 3, "test task");
     print_array($status);
 
     // get_tasks
