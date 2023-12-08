@@ -211,7 +211,7 @@
         echo "<pre style='color:white'>"; print($end); echo "</pre>";*/
 
         create_project($_POST["title"], $_POST["description"], $start, $end, $uid);
-        header("Refresh:0");
+        header("userHome.php");
     }
   
   ?>
