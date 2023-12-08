@@ -149,7 +149,7 @@ if ($conn->connect_error) {
                     "
                 );
                 
-                $statement1->bind_param("siiis", $name, $start, $end, $projectid, $description);
+                $statement1->bind_param("sssis", $name, $start, $end, $projectid, $description);
                 $statement1->execute();
                 
                 //assign user to the project
