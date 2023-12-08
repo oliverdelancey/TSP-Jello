@@ -97,9 +97,10 @@ if ($conn->connect_error) {
             $statement->bind_param("d", $columnid);
 
             $statement->execute();
-            
+            $result = $statement->get_result();
 
-            return "Task Created successfully!";
+            
+            return $result->fetch_all();
         } catch(mysqli_sql_exception $e){
             print "Error!" . $e->getMessage() . "<br/>"; 
             die(); 
@@ -112,7 +113,7 @@ if ($conn->connect_error) {
             $statement = $conn->prepare(
                 "select name, id 
                     from users
-                    inner join projectAssignments ? = proj_id and id = user_id;
+                    inner join projectAssignments on ? = proj_id and id = user_id;
                     "
             );
 
