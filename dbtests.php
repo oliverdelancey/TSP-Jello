@@ -151,7 +151,8 @@ try {
 
 } catch(PDOException $e) {
     print "Error!" . $e->getMessage() . "<br/>"; 
-    
+} catch (Exception $e) {
+    print "General Error!" . $e->getMessage() . "<br/>"; 
 } finally {
     // data only needs to exist for hte lifetime of the test
     // if ($committed) {
