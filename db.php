@@ -339,6 +339,8 @@ if ($conn->connect_error) {
 
             return 0;
 
+            //return $result->fetch_all();
+            return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
             return 1;
@@ -358,10 +360,9 @@ if ($conn->connect_error) {
 
             $statement->bind_param("si", $name, $id);
             $statement->execute();
-            // $result = $statement->get_result();
 
+            //return $result->fetch_all();
             return 0;
-
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
             return 1;
@@ -436,7 +437,7 @@ if ($conn->connect_error) {
             $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute(); 
-            //$result = $statement->get_result();
+            $result = $statement->get_result();
 
             return 0;
         } catch(mysqli_sql_exception $e){
@@ -457,7 +458,7 @@ if ($conn->connect_error) {
             $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute();
-            $result = $statement->get_result();
+            //$result = $statement->get_result();
 
             return 0;
         } catch(mysqli_sql_exception $e){
