@@ -322,6 +322,7 @@ if ($conn->connect_error) {
             return 1;
         } catch (Exception $e) {
             print "General Error!" . $e->getMessage() . "<br/>"; 
+            return 1;
         }
     }
 
@@ -346,6 +347,9 @@ if ($conn->connect_error) {
             return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
+            return 1;
+        } catch (Exception $e) {
+            print "General Error!" . $e->getMessage() . "<br/>"; 
             return 1;
         }
     }
