@@ -175,22 +175,23 @@
                 echo "<td>";
                 echo "<a href='userHome.php?id=$proj_id' class='row-link'>";
                 print $userProjects[$i][0]; 
-                echo "</td>";
+                echo "</a></td>";
 
                 echo "<td>";
                 echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][4]; 
-                echo "</td>";
+                echo "</a></td>";
                 
                 echo "<td>";
                 echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][1];
-                echo "</td>";
+                echo "</a></td>";
 
                 echo "<td>";
                 echo "<a href='userHome.php?id=$proj_id' tabindex='-1' class='row-link'>";
                 print $userProjects[$i][2]; 
-                echo "</td>";
+                echo "</a></td>";
+                
 
                 echo "</tr>";
             }
