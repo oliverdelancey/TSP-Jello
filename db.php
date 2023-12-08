@@ -46,7 +46,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("d", $userid);
+            $statement->bind_param("i", $userid);
 
             $statement->execute(); 
             $result = $statement->get_result();
@@ -68,7 +68,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("d", $projectid);
+            $statement->bind_param("i", $projectid);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -94,7 +94,7 @@ if ($conn->connect_error) {
                 "
             );
 
-            $statement->bind_param("d", $columnid);
+            $statement->bind_param("i", $columnid);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -117,7 +117,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("d", $projectid);
+            $statement->bind_param("i", $projectid);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -155,9 +155,10 @@ if ($conn->connect_error) {
                 
                 //assign user to the project
                 create_project_assignment($userid, $projectid);
+                create_column("default", $projectid);
 
             $conn->commit();
-            return "Project created successfully!";
+            return $statement1->get_result()->fetch_all();
 
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>"; 
@@ -237,7 +238,7 @@ if ($conn->connect_error) {
                 "
             );
 
-            $statement->bind_param("d", $projectid);
+            $statement->bind_param("i", $projectid);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -266,8 +267,8 @@ if ($conn->connect_error) {
                         where id = ?;"
                 );
 
-                $statement->bind_param("dd", $defaultid, $columnid);
-                $statement2->bind_param("d", $columnid);
+                $statement->bind_param("ii", $defaultid, $columnid);
+                $statement2->bind_param("i", $columnid);
 
                 $statement->execute();
                 $statement2->execute();
@@ -291,7 +292,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("d", $projectid);
+            $statement->bind_param("i", $projectid);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -313,7 +314,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("ddssd", $columnid, $priority, $description, $status, $id);
+            $statement->bind_param("iissi", $columnid, $priority, $description, $status, $id);
 
             $statement->execute();
             $result = $statement->get_result();
@@ -381,7 +382,7 @@ if ($conn->connect_error) {
                         where task_id = ?;                    
                     "
                 );
-                $statement1->bind_param("d", $taskid);
+                $statement1->bind_param("i", $taskid);
                 $statement1->execute();
                 $result1 = $statement1->get_result();
                 $result1Row = $result1->fetch_row();
@@ -392,7 +393,7 @@ if ($conn->connect_error) {
                             values (?, ?);
                         "
                     );
-                    $statement2->bind_param("dd", $userid, $taskid);
+                    $statement2->bind_param("ii", $userid, $taskid);
                     $statement2->execute();
                     $result2 = $statement2->get_result();
                 } else if($result1Row[0] == $userid){ //entry has userid as the assignment
@@ -402,7 +403,7 @@ if ($conn->connect_error) {
                             where task_id = ?;
                             "
                     );
-                    $statement2->bind_param("d", $taskid);
+                    $statement2->bind_param("i", $taskid);
                     $statement2->execute();
                     $result2 = $statement2->get_result();    
                 } else{ //entry has some other user or null as assignment 
@@ -412,7 +413,7 @@ if ($conn->connect_error) {
                             where task_id = ?;
                             "
                     );
-                    $statement2->bind_param("dd", $userid, $taskid);
+                    $statement2->bind_param("ii", $userid, $taskid);
                     $statement2->execute();
                     $result2 = $statement2->get_result();
                 }
@@ -436,7 +437,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("dd", $userid, $projectid);
+            $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute(); 
             //$result = $statement->get_result();
@@ -456,7 +457,7 @@ if ($conn->connect_error) {
                     "
             );
 
-            $statement->bind_param("dd", $userid, $projectid);
+            $statement->bind_param("ii", $userid, $projectid);
 
             $statement->execute();
             $result = $statement->get_result();
