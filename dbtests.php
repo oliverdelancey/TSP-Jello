@@ -26,8 +26,9 @@ function print_array($array) {
 }
 
 try {
-    $conn->autocommit(false);
-    $committed = false;
+    $conn->begin_transaction();
+    // $conn->autocommit(false);
+    // $committed = false;
 
     $statement = $conn->prepare(
         "select id from users where username = ?"
@@ -130,17 +131,20 @@ try {
     print_array($result);
 
 
-    $conn->commit();
-    $committed = true;
+    // $conn->commit();
+    // $committed = true;
 
 } catch(PDOException $e) {
     print "Error!" . $e->getMessage() . "<br/>"; 
-    die(); 
+    
 } finally {
-    if ($committed) {
-        $conn->rollback();  // undo changes
-    }
-    $conn->autocommit(true);
+    // data only needs to exist for hte lifetime of the test
+    // if ($committed) {
+    //     $conn->rollback();  // undo changes
+    // }
+    // $conn->autocommit(true);
+    $conn->rollback();
+    die(); 
 }
 
 
