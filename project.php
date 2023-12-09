@@ -205,7 +205,7 @@ function deleteTask(event) {
 </head>
 <body>
 
-<h2>Project Jello</h2>
+<h2>Project: <?php echo $_GET["id"]?></h2>
 <div class="row" id="columnRow">
   <button id="createColumn" onclick="makeColumn();">Create Column</button>
   <input type="text" id="columnName">
@@ -216,7 +216,7 @@ function deleteTask(event) {
     for($i = 0; $i < sizeof($columns); $i++){
         $colid = $columns[$i][0];
         $colname = $columns[$i][1];
-        echo "var curr = document.getElementById('columnRow');                
+        echo "<script>var curr = document.getElementById('columnRow');                
 
         const column = document.createElement('div');                   
         column.setAttribute('class', 'columnMain');
@@ -234,7 +234,7 @@ function deleteTask(event) {
         column.appendChild(deleteButton);                               
 
         document.getElementById('columnName').value = '';               
-        columnCounter++;";                                               
+        </script>";                                               
     }
   ?>
 </div>
