@@ -227,6 +227,25 @@ if ($conn->connect_error) {
             return 1;
         }
     }
+
+    function delete_user($userid){
+        global $conn;
+        try{
+            $statement = $conn->prepare(
+                "delete from users
+                    where id = ?;
+                "
+            );
+
+            $statement->bind_param("i", $userid);
+            $statement->execute();
+            
+            return 0;
+        } catch(mysqli_sql_exception $e){
+            print "Error!" . $e->getMessage() . "<br/>";  
+            return 1;
+        }
+    }
     
     function delete_project($projectid){
         global $conn;

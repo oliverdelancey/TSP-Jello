@@ -135,6 +135,8 @@ try {
     foreach ($columns as $col) {
         if ($col[1] == "default") {
             $defaultid = $col[0];
+        } else{
+            $columnid = $col[0];
         }
     }
     $result = delete_column($columnid, $defaultid);
@@ -143,6 +145,11 @@ try {
     // delete_project
     heading("function delete_project");
     $result = delete_project($projectid);
+    print_array($result);
+
+    //delete_user
+    heading("function delete_user");
+    $result = delete_user($userid);
     print_array($result);
 
 
