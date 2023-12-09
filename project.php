@@ -127,6 +127,44 @@ function makeTask() {
   taskContainer.appendChild(editButton);    //Put the edit button into the container.
   taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
 
+  //Update database with new task.
+  //All of the values needted to be updated can later be saved in vars before making all of the elements.
+}
+
+/*functionally the same as make task, created to try and use sql data to auto generate task from database*/
+function generateTask(name, id) {
+                                                          //NOTE: below all of these \/ is just setting the various attribute for the respective elements.
+  const taskContainer = document.createElement("div");    //overaching task container, the main div that hold the entire task.
+  taskContainer.setAttribute("class", "element");
+  taskContainer.setAttribute("id", "taskContainer" + taskCounter);
+  taskContainer.setAttribute("draggable", "true");
+  taskContainer.setAttribute("ondragstart", "drag(event)");
+
+  const taskTextArea = document.createElement("div");     //The div housing the text of the task.
+  taskTextArea.setAttribute("id", "taskTextArea" + taskCounter);
+
+  const taskText = document.createElement("p");           //The actual text in the task.
+  taskText.setAttribute("id", "taskText" + taskCounter);
+
+  const editButton = document.createElement("button");    //The edit button for the task.
+  editButton.setAttribute("id", "edit" + taskCounter);
+  editButton.setAttribute("onclick", "editTask(this)");
+  editButton.innerText = "Edit";
+  const deleteButton = document.createElement("button");  //The delete button for the task.
+  deleteButton.setAttribute("id", "deleteTask" + taskCounter);
+  deleteButton.setAttribute("onclick", "deleteTask(this)");
+  deleteButton.setAttribute("class", "deleteButton");
+  deleteButton.innerText = "Delete";
+
+  taskText.innerText = document.getElementById("taskName").value; //Setting the task name (what shows to the user) to whatever was inputted into the task name field.
+                                            //Note that CSS styling was used to make this appear not ugly.
+                                            //Assembling the task now that the elements have been created.
+  dragArea.appendChild(taskContainer);      //Put the task container in the starting location.
+  taskContainer.appendChild(taskTextArea);  //Put the Text Area div in the container.
+  taskTextArea.appendChild(taskText);       //Put the actual text into the Text Area.
+  taskContainer.appendChild(editButton);    //Put the edit button into the container.
+  taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
+
   document.getElementById("taskName").value = ""; //Clear task name input for convenience.
   taskCounter++;                                  //increment the unique task id counter.
 
@@ -164,11 +202,34 @@ function makeColumn() {
   columnCounter++;                                                //increment unique column id generator
 }
 
+/*functionally the same as make column, created to try and use sql data to auto generate columns from database*/
+function generateColumn(name, id) {
+    var curr = document.getElementById("columnRow");                //grab the page element that houses all the columns.
+
+                                                                    //Same as with tasks, below all of these are just the attribute assignments.
+    const column = document.createElement("div");                   //Create the main column div.
+    column.setAttribute("class", "columnMain");
+    column.setAttribute("id", id);
+    column.setAttribute("ondrop", "drop(event)");
+    column.setAttribute("ondragover", "allowDrop(event)");
+    column.innerText = name; //Set the name of the column to what the user put into the input field
+    curr.appendChild(column);                                       //Add the column to the element housing all columns
+
+    const deleteButton = document.createElement("button");          //Create the delete button for the column.
+    deleteButton.setAttribute("id", "deleteColumn" + id);
+    deleteButton.setAttribute("onclick", "deleteColumn(this)");
+    deleteButton.setAttribute("class", "deleteButton");
+    deleteButton.innerText = "Delete";
+    column.appendChild(deleteButton);                               //Add delete button to the column.
+
+}
+
 /**
  * This function will delete the parent element of whatever element it is called on effectively deleting itself.
 */
 function deleteColumn(event) {
   event.parentNode.parentNode.removeChild(event.parentNode);
+  event.parentNode.getData()
 }
 
 /**
@@ -213,26 +274,11 @@ function deleteTask(event) {
   <?php 
     include "db.php";
     $columns = get_columns($_GET["id"]);
-    echo "<pre>"; print_r($columns); echo "</pre>";
+    //echo "<pre>"; print_r($columns); echo "</pre>";
     for($i = 0; $i < sizeof($columns); $i++){
         $colid = $columns[$i][0];
         $colname = $columns[$i][1];
-        echo "<script>var curr = document.getElementById('columnRow');                
-
-        const column = document.createElement('div');                   
-        column.setAttribute('class', 'columnMain');
-        column.setAttribute('id', 'droppable');
-        column.setAttribute('ondrop', 'drop(event)');
-        column.setAttribute('ondragover', 'allowDrop(event)');
-        column.innerText = $colname; //Set the name of the column to what the user put into the input field
-        curr.appendChild(column);                                       //Add the column to the element housing all columns
-
-        const deleteButton = document.createElement('button');          //Create the delete button for the column.
-        deleteButton.setAttribute('id','deleteColumn' + $colid);
-        deleteButton.setAttribute('onclick', 'deleteColumn(this)');
-        deleteButton.setAttribute('class', 'deleteButton');
-        deleteButton.innerText = 'Delete';
-        column.appendChild(deleteButton);";                               
+        echo "<script> generateColumn($colname, $colid)";                               
 
 
         for($j = 0; $j < sizeof($columns); $j++){
@@ -240,37 +286,7 @@ function deleteTask(event) {
             $taskid = $tasks[$j][0];
             $taskdesc = $tasks[$j][2];
 
-            echo "const taskContainer = document.createElement('div');    //overaching task container, the main div that hold the entire task.
-            taskContainer.setAttribute('class', 'element');
-            taskContainer.setAttribute('id', 'taskContainer' + $taskid);
-            taskContainer.setAttribute('draggable', 'true');
-            taskContainer.setAttribute('ondragstart', 'drag(event)');
-          
-            const taskTextArea = document.createElement('div');     //The div housing the text of the task.
-            taskTextArea.setAttribute('id', 'taskTextArea' + $taskid);
-          
-            const taskText = document.createElement('p');           //The actual text in the task.
-            taskText.setAttribute('id', 'taskText' + $taskid);
-          
-            const editButton = document.createElement('button');    //The edit button for the task.
-            editButton.setAttribute('id', 'edit' + $taskid);
-            editButton.setAttribute('onclick', 'editTask(this)');
-            editButton.innerText = 'Edit';
-            const deleteButton = document.createElement('button');  //The delete button for the task.
-            deleteButton.setAttribute('id', 'deleteTask' + $taskid);
-            deleteButton.setAttribute('onclick', 'deleteTask(this)');
-            deleteButton.setAttribute('class', 'deleteButton');
-            deleteButton.innerText = 'Delete';
-          
-            taskText.innerText = $taskdesc; //Setting the task name (what shows to the user) to whatever was inputted into the task name field.
-                                                      //Note that CSS styling was used to make this appear not ugly.
-                                                      //Assembling the task now that the elements have been created.
-            dragArea.appendChild(taskContainer);      //Put the task container in the starting location.
-            taskContainer.appendChild(taskTextArea);  //Put the Text Area div in the container.
-            taskTextArea.appendChild(taskText);       //Put the actual text into the Text Area.
-            taskContainer.appendChild(editButton);    //Put the edit button into the container.
-            taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
-            ";
+            echo "";
         }
 
         echo "</script>";                                               
