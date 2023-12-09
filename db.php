@@ -339,7 +339,7 @@ if ($conn->connect_error) {
 
             $statement->bind_param("siisi", $name, $start, $end, $description, $id);
             $statement->execute();
-            
+
             return 0;
         } catch (mysqli_sql_exception $e) {
             print "Error!" . $e->getMessage() . "<br/>";
@@ -390,7 +390,7 @@ if ($conn->connect_error) {
 
                 if($result1Row == null){ //entry doesn't exist 
                     $statement2 = $conn->prepare(
-                        "insert into taskAssignment
+                        "insert into taskAssignments
                             values (?, ?);
                         "
                     );
@@ -399,7 +399,7 @@ if ($conn->connect_error) {
                     
                 } else if($result1Row[0] == $userid){ //entry has userid as the assignment
                     $statement2 = $conn->prepare(
-                        "update taskAssignment
+                        "update taskAssignments
                             set user_id = NULL
                             where task_id = ?;
                             "
@@ -409,7 +409,7 @@ if ($conn->connect_error) {
                       
                 } else{ //entry has some other user or null as assignment 
                     $statement2 = $conn->prepare(
-                        "update taskAssignment
+                        "update taskAssignments
                             set user_id = ?
                             where task_id = ?;
                             "
@@ -454,7 +454,7 @@ if ($conn->connect_error) {
         global $conn;
         try{
             $statement = $conn->prepare(
-                "remove from projectAssignments
+                "delete from projectAssignments
                     where user_id = ? and proj_id = ?;
                     "
             );
