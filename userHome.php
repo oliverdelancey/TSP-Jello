@@ -190,7 +190,7 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='project.php?id=$proj_id?name=$name' class='row-link'>";
+                echo "<a href='project.php?id=$proj_id&name=$name' class='row-link'>";
                 echo "Go to Project"; 
                 echo "</td>";
 
