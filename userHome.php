@@ -172,6 +172,7 @@
             for($i = 0; $i < sizeof($userProjects); $i++){
                 echo "<tr>";
                 $proj_id = $userProjects[$i][3];
+                $name = $userProjects[$i][0];
                 echo "<td>";
                 print $userProjects[$i][0]; 
                 echo "</td>";
@@ -189,7 +190,7 @@
                 echo "</td>";
 
                 echo "<td>";
-                echo "<a href='project.php?id=$proj_id' class='row-link'>";
+                echo "<a href='project.php?id=$proj_id&name=$name' class='row-link'>";
                 echo "Go to Project"; 
                 echo "</td>";
 

@@ -127,6 +127,9 @@ function makeTask() {
   taskContainer.appendChild(editButton);    //Put the edit button into the container.
   taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
 
+  taskCounter++;                                  //increment the unique task id counter.
+  document.getElementById("taskName").value = ""; //Clear task name input for convenience.
+
   //Update database with new task.
   //All of the values needted to be updated can later be saved in vars before making all of the elements.
 }
@@ -266,7 +269,7 @@ function deleteTask(event) {
 </head>
 <body>
 
-<h2>Project: <?php echo $_GET["id"]?></h2>
+<h2>Project: <?php echo $_GET["name"]?></h2>
 <div class="row" id="columnRow">
   <button id="createColumn" onclick="makeColumn();">Create Column</button>
   <input type="text" id="columnName">
