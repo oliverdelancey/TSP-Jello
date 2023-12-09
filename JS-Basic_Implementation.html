@@ -117,7 +117,7 @@ function makeTask() {
   deleteButton.setAttribute("onclick", "deleteTask(this)");
   deleteButton.setAttribute("class", "deleteButton");
   deleteButton.innerText = "Delete";
-  taskCounter++;                                  //increment the unique task id counter.
+
   taskText.innerText = document.getElementById("taskName").value; //Setting the task name (what shows to the user) to whatever was inputted into the task name field.
                                             //Note that CSS styling was used to make this appear not ugly.
                                             //Assembling the task now that the elements have been created.
@@ -128,7 +128,8 @@ function makeTask() {
   taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
 
   document.getElementById("taskName").value = ""; //Clear task name input for convenience.
-  
+  taskCounter++;                                  //increment the unique task id counter.
+  alert(taskCounter);
 
   //Update database with new task.
   //All of the values needted to be updated can later be saved in vars before making all of the elements.
