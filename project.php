@@ -272,6 +272,7 @@ function deleteTask(event) {
   <input type="text" id="columnName">
   <br>
   <?php 
+    
     include "db.php";
     $columns = get_columns($_GET["id"]);
     //echo "<pre>"; print_r($columns); echo "</pre>";
@@ -281,13 +282,13 @@ function deleteTask(event) {
         echo "<script> generateColumn($colname, $colid)";                               
 
 
-        for($j = 0; $j < sizeof($columns); $j++){
+        /*for($j = 0; $j < sizeof($columns); $j++){
             $tasks = get_tasks($colid);
             $taskid = $tasks[$j][0];
             $taskdesc = $tasks[$j][2];
 
-            echo "";
-        }
+            echo "generateTask($taskdesc, $taskid)";
+        }*/
 
         echo "</script>";                                               
     }
