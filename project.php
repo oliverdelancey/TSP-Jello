@@ -127,6 +127,9 @@ function makeTask() {
   taskContainer.appendChild(editButton);    //Put the edit button into the container.
   taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
 
+  taskCounter++;                                  //increment the unique task id counter.
+  document.getElementById("taskName").value = ""; //Clear task name input for convenience.
+
   //Update database with new task.
   //All of the values needted to be updated can later be saved in vars before making all of the elements.
 }

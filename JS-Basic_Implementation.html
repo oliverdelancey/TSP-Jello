@@ -95,6 +95,9 @@ editText.setAttribute("type", "text");
  * database.
 */
 function makeTask() {
+  alert(taskCounter);
+  taskCounter++;                                  //increment the unique task id counter.
+  document.getElementById("taskName").value = ""; //Clear task name input for convenience.
                                                           //NOTE: below all of these \/ is just setting the various attribute for the respective elements.
   const taskContainer = document.createElement("div");    //overaching task container, the main div that hold the entire task.
   taskContainer.setAttribute("class", "element");
@@ -126,10 +129,6 @@ function makeTask() {
   taskTextArea.appendChild(taskText);       //Put the actual text into the Text Area.
   taskContainer.appendChild(editButton);    //Put the edit button into the container.
   taskContainer.appendChild(deleteButton);  //Put the delete button into the container.
-
-  document.getElementById("taskName").value = ""; //Clear task name input for convenience.
-  taskCounter++;                                  //increment the unique task id counter.
-  alert(taskCounter);
 
   //Update database with new task.
   //All of the values needted to be updated can later be saved in vars before making all of the elements.
